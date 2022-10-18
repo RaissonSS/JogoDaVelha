@@ -1,0 +1,59 @@
+Git é um sistema de controle de versão de arquivos.
+Com ele podemos desenvolver projetos colaborativos com facilidade.
+
+----------------------------------------------------------------------
+
+git status
+> mostra o status git do projeto
+
+git add .
+> adiciona todos os arquivos não visualizados
+
+git commit -m '[comentario do commit]'
+sobe o arquivo
+
+COMANDOS - HISTÓRICO -------------------------------------------------------------
+
+git log
+> mostra cada commit realizado
+
+git log --pretty=oneline
+> mostra cada commit em uma linha só
+
+git log --stat
+> mostra cada commit realizado detalhadamente
+
+COMANDOS - CONSERTANDO -------------------------------------------------------------
+
+git commit --amend
+> adiciona um arquivo já adicionado a um commit anterior, podendo mudar o nome do commit anterior
+
+git reset HEAD [file]
+> retira um arquivo do monitoramento (add)
+
+git checkout -- [file]
+> exclui todas as alterações feitas em um arquivo que não foi MONITORADO
+
+COMANDOS GITHUB ------------------------------------------------------------
+
+git push origin [branch name (master)]
+> sobe todo o projeto dentro da branch especificada para o repositório online
+>> na primeira vez necessita de login na conta do GITHUB
+
+qualquer coisa use -f no final...
+
+git pull origin [branch name (master)]
+> puxa todo o projeto dentro da branch especificada do repositório online
+>> pode avisar que já está tudo dentro caso esse seja o caso
+
+ARQUIVOS ------------------------------------------------------------
+
+.gitignore
+> qualquer arquivo escrito neste, será ignorado ao pedir para ser monitorado e não
+subirá para o repositório online em caso de push
+
+LICENSE
+> licensa pública do projeto que indica como e quem pode usar esse projeto.
+
+README.md
+> arquivo de apresentação do projeto

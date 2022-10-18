@@ -1,0 +1,71 @@
+*** JOGO DA VELHA ***
+
+- CLASSES
+- PvP
+- PvE
+- Score
+- Salvar o estado da aplicação em .txt
+
+Verificar existencia do arquivo score.xtx
+CASO EXISTA:
+    perguntar se deseja continuar
+    SE SIM:
+        continuar jogo
+    SE NÃO:
+        começar do zero
+
+Menu para selecionar se deseja PvP ou PvE
+CASO PVP:
+    instanciar dois objetos da classe jogador
+CASO PVE:
+    instanciar objeto da classe jogador e classe máquina
+
+salvar os scores de cada jogador e da máquina
+
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+CLASSE JOGADOR:
+    PARÂMETROS:
+        nome
+        pontuação
+        locais escolhidos
+    
+    MÉTODOS:
+        escolher local:
+            assina na classe JOGO a posição
+
+CLASSE MÁQUINA:
+    PARÃMETROS:
+        pontuação
+        locais escolhidos
+
+    MÉTODOS:
+        escolher local:
+            escolhe aleatóriamente o local
+
+CLASSE JOGO:
+    PARÃMETROS:
+        matriz
+
+    MÉTODOS:
+        verifica jogo:
+            verifica vitória ou empate
+
+CLASSE FILETXT:
+    PARÂMETROS:
+        none
+
+    MÉTODOS:
+        verificador de arquivo:
+            verifica a existência do score.txt e segue
+
+SCORE.TXT
+"""
+PLAYER 01#nome_jogador#pontuacao
+PLAYER 02#nome_jogador#pontuacao
+MACHINE#pontuacao
+"""
+
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+plus: falsa inteligência artifical

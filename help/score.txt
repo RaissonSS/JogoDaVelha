@@ -1,0 +1,3 @@
+PLAYER 01#Raisson#10
+PLAYER 02#Mariane#34
+MACHINE#0

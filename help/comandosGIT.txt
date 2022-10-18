@@ -1,0 +1,97 @@
+Git é um sistema de controle de versão de arquivos.
+Com ele podemos desenvolver projetos colaborativos com facilidade.
+
+COMANDOS - CONFIG -------------------------------------------------------------
+
+git config --global user.name "Your Name"
+git config --global user.email you@example.com
+git config --list
+git commit --amend --reset-author
+
+COMANDOS - COMMIT -------------------------------------------------------------
+
+git init
+> cria a pasta .git
+
+git status
+> mostra o status git do projeto
+
+git add [file]
+adiciona um arquivo específico ao monitoramento
+
+git add .
+> adiciona todos os arquivos não visualizados
+
+git commit -m '[comentario do commit]'
+sobe o arquivo
+
+COMANDOS - HISTÓRICO -------------------------------------------------------------
+
+git log
+> mostra cada commit realizado
+
+git log --pretty=oneline
+> mostra cada commit em uma linha só
+
+git log --stat
+> mostra cada commit realizado detalhadamente
+
+git diff
+> O comando git diff, sem parâmetros, permite visualizar as alterações ainda não selecionadas para o commit.
+
+COMANDOS - CONSERTANDO -------------------------------------------------------------
+
+git commit --amend
+> adiciona um arquivo já adicionado a um commit anterior, podendo mudar o nome do commit anterior
+
+git reset HEAD [file]
+> retira um arquivo do monitoramento (add)
+
+git checkout -- [file]
+> exclui todas as alterações feitas em um arquivo que não foi MONITORADO
+
+COMANDOS BRANCH ------------------------------------------------------------
+
+branches (ramos) servem para desenvolvermos features isoladas, a branch master é a principal
+é possível misturar as branches usando o comando MERGE
+
+git branch
+> mostra as branches do projeto
+
+git branch [branch name]
+> cria uma nova branch
+
+git checkout [branch name]
+> muda para a branch selecionada
+
+git branch -d [branch name]
+git branch -D [branch name]
+> exclui uma branch
+
+git checkout -b [branch name]
+> cria e muda para a branch criada
+
+COMANDOS MODIFICAÇÃO ------------------------------------------------------------
+
+git merge [branch name]
+> irá unificar duas branchs (dentro daquela em que foi chamado o git merge)
+>> pode-se continuar editando na segunda branch após o merge sem problemas
+
+COMANDOS GITHUB ------------------------------------------------------------
+
+git remote add origin [http link]
+> remotamente estabelece ligação com o repositório no GITHUB
+
+git push origin [branch name (master)]
+> sobe todo o projeto dentro da branch especificada para o repositório online
+>> na primeira vez necessita de login na conta do GITHUB
+
+git pull origin [branch name (master)]
+> puxa todo o projeto dentro da branch especificada do repositório online
+>> pode avisar que já está tudo dentro caso esse seja o caso
+
+ARQUIVOS ------------------------------------------------------------
+
+.gitignore
+> qualquer arquivo escrito neste, será ignorado ao pedir para ser monitorado e não
+subirá para o repositório online em caso de push
