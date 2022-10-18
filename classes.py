@@ -1,4 +1,4 @@
-class Jogador:
+class Player:
     pass
     def __init__(self, nome, pontuacao, locaisE):
         self.nome = nome 
@@ -8,12 +8,12 @@ class Jogador:
     #def escolherlugar(self, locau):
         
 
-class Maquina:
+class Machine:
     pass
 
 
 
-class Jogo:
+class Game:
     pass
 
 

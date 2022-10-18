@@ -22,5 +22,6 @@ class txtFile:
             return False
 
     def CreateScore():
-        # criar arquivo
-        pass
+        
+        def CreateScoreFile():
+            pass
