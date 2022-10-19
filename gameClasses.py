@@ -16,7 +16,16 @@ class Machine:
 
 
 class Game:
-    pass
+    
+    board = [ [0, 0, 0],
+              [0, 0, 0],
+              [0, 0, 0] ]
 
+    def SetPlace():
+        pass
 
+    def VerifyGameState():
+        pass
 
+    def EndGame():
+        pass
