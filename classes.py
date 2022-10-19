@@ -1,3 +1,5 @@
+from txtFileClass import txtFile as Score
+
 class Player:
     pass
     def __init__(self, nome, pontuacao, locaisE):
