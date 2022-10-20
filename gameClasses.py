@@ -1,25 +1,42 @@
-import imp
 from txtFileClass import txtFile as Score
 from TreatedInputs import *
 from time import sleep
 from os import system
 
 class Player:
-    pass
-    def __init__(self, nome, pontuacao, locaisE):
-        self.nome = nome 
-        self.pontuacao = pontuacao
-        self.locaisE = locaisE 
+    '''
+    responsável por instanciar os jogadores e realizar suas jogadas.
+    se comunica com a classe Game.
+    '''
+    
+    def __init__(self, name, score, places):  # MÉTODO CONSTRUTOR
+        self.name = name 
+        self.score = score
+        self.places = places 
 
-    #def escolherlugar(self, locau):
+    def escolherlugar(self):
+        '''
+        realiza a escolha do local do jogador no tabuleiro.
+        se comunica com ... para saber se o local é valido.
+        '''
+        pass
         
 
 class Machine:
+    '''
+    responsável por atuar como computador/máquina interagindo com o jogador aleatóriamente.
+    funciona como a classe Player, mas aleatóriamente.
+    é possivel simular uma inteligência artificial...
+    '''
     pass
 
 
 
-class Game:
+class Game:  # é necessário que os métodos de verificação não alertem no terminal caso a MÁQUINA jogue (adaptar)
+    '''
+    responsável por controlar o tabuleiro, verificar local e se há vencedor ou empate.
+    pode resetar a si próprio.
+    '''
     
     board = [ [0, 0, 0],
               [0, 0, 0],
@@ -36,8 +53,12 @@ class Game:
 
 
 class Menu:
+    '''
+    realiza a movimentação do jogo, chamando a classe txtFile e fazendo verificações.
+    se comunica diretamente com Player, Machine e Game para dar andamento ao jogo
+    '''
 
-    def Opening():
+    def Opening():  # inicia o jogo, chamando txtFile para verificar como proceder na abertura
         print("*** JOGO DA VELHA ***")
         sleep(1)
         print("\nInicializando...")
@@ -63,10 +84,10 @@ class Menu:
             refresh()
             return ScoreData
 
-    def ContinueGame():
-        pass
+    '''def ContinueGame():
+        pass'''  # MÉTODO ARQUIVADO / inutilidade
 
-    def NewGame():
+    def NewGame():  # simula a iniciação do zero
         print("*** JOGO DA VELHA ***")
         p1_name = Name(1)
         p2_name = Name(2)

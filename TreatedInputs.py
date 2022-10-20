@@ -1,4 +1,4 @@
-def Name(playerNumber):
+def Name(playerNumber):  # trata inputs destinados ao nome
     finished = False
     while finished != True:
         name = str(input(f"Digite o nome do { playerNumber }° jogador: ")).strip()
