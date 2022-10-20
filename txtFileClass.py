@@ -6,14 +6,15 @@ class txtFile:
         except:
             return False
         else:
-            txtFile.PlayerInfoGetter(file)
+            file.close()
+            return True
 
-    def PlayerInfoGetter(file):
+    def PlayerInfoGetter():
+        file = open("score.txt", "r")
         lines = file.readlines()
         player01 = [lines[0].split("#")[1], lines[0].split("#")[2].replace("\n", "")]
         player02 = [lines[1].split("#")[1], lines[1].split("#")[2].replace("\n", "")]
-        print(player01, player02)
-        return [player01, player02]  # TEM QUE RETORNAR O SCORE DA MÁQUINA!
+        return player01, player02  # TEM QUE RETORNAR O SCORE DA MÁQUINA!
 
     '''def CreateScore():
         file = open("score.txt", "w")

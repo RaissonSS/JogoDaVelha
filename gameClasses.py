@@ -44,20 +44,19 @@ class Menu:
             print(".")
         print()
         refresh()
-        verification = Score.ScoreVerifier()
-        print(verification)
         print("*** JOGO DA VELHA ***\n\n")
 
-        if verification == False:
+        if Score.ScoreVerifier() == False:
             print("Parece que é a sua primeira vez aqui...\nVamos jogar?")
+            return False
         else:
+            ScoreData = Score.PlayerInfoGetter()
             print("Seus dados foram carregados!\n" +
-            f"Jogador 01: { verification[0][0] } | Pontuação: { verification[0][1] }\n" +
-            f"Jogador 02: { verification[1][0] } | Pontuação: { verification[1][1] }\n" +
+            f"Jogador 01: { ScoreData[0][0] } | Pontuação: { ScoreData[0][1] }\n" +
+            f"Jogador 02: { ScoreData[1][0] } | Pontuação: { ScoreData[1][1] }\n" +
             f"Máquina: ...")
-
-        input("\n\nPressione ENTER para iniciar... ")
-        return verification
+            return ScoreData
+            input("\n\nPressione ENTER para continuar... ")
 
     def ContinueGame():
         pass
