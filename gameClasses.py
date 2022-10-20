@@ -1,4 +1,6 @@
+import imp
 from txtFileClass import txtFile as Score
+from TreatedInputs import *
 from time import sleep
 from os import system
 
@@ -65,7 +67,12 @@ class Menu:
         pass
 
     def NewGame():
-        pass
+        print("*** JOGO DA VELHA ***")
+        p1_name = Name(1)
+        p2_name = Name(2)
+        Score.WriteData([p1_name, 0], [p2_name, 0], 0)
+        input("\nPressione ENTER para continuar... ")
+        refresh()
 
 
 
