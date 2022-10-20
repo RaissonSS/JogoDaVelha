@@ -1,2 +1,3 @@
-import imp
 from gameClasses import *
+
+Menu.Opening()
