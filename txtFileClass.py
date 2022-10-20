@@ -14,7 +14,8 @@ class txtFile:
         lines = file.readlines()
         player01 = [lines[0].split("#")[1], lines[0].split("#")[2].replace("\n", "")]
         player02 = [lines[1].split("#")[1], lines[1].split("#")[2].replace("\n", "")]
-        return player01, player02  # TEM QUE RETORNAR O SCORE DA MÁQUINA!
+        machine = lines[2].split("#")[1]
+        return player01, player02, machine  # TEM QUE RETORNAR O SCORE DA MÁQUINA!
 
     '''def CreateScore():
         file = open("score.txt", "w")

@@ -1,3 +1,8 @@
 from gameClasses import *
 
-Menu.Opening()
+newGame = Menu.Opening()
+
+if newGame:
+    Menu.ContinueGame()
+else:
+    Menu.NewGame()
