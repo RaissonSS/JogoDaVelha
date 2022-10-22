@@ -100,8 +100,10 @@ class Menu:
             Refresh()
             return ScoreData
 
+
     '''def ContinueGame():
         pass'''  # MÉTODO ARQUIVADO / inutilidade
+
 
     def new_game():  # simula a iniciação do zero
         print("*** JOGO DA VELHA ***")
@@ -110,3 +112,23 @@ class Menu:
         Score.write_data([p1_name, 0], [p2_name, 0], 0)
         input("\nPressione ENTER para continuar... ")
         Refresh()
+        return [[p1_name, 0], [p2_name, 0], 0]
+
+    
+    def game(score):
+        print("*** JOGO DA VELHA ***")
+        print(f"\n\nBem vindos novamente { score[0][0] } e { score[1][0] }!\nO que desejam fazer?")
+        print(f"\r[ 1 ] Jogar juntos\n\r[ 2 ] Jogar contra máquina\n\r[ 3 ] Configurações\n\r[ 4 ] Sair\n")
+        opc = Option("Sua opção >>> ", 4)
+
+        if opc == 1:
+            pass
+
+        elif opc == 2:
+            pass
+
+        elif opc == 3:
+            pass
+
+        elif opc == 4:
+            pass
