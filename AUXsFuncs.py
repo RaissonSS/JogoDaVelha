@@ -1,6 +1,5 @@
 from os import system
 
-
 def Name(playerNumber):  # trata inputs destinados ao nome
     finished = False
     while finished != True:
@@ -32,3 +31,6 @@ def Option(msg, max, min=1):
 
 def Refresh():  # limpa o terminal
     system('cls')
+
+def End():
+    quit()

@@ -1,3 +1,5 @@
+from pdb import Restart
+import sys
 from txtFileClass import Score
 from AUXsFuncs import *
 from time import sleep
@@ -120,15 +122,52 @@ class Menu:
         print(f"\n\nBem vindos novamente { score[0][0] } e { score[1][0] }!\nO que desejam fazer?")
         print(f"\r[ 1 ] Jogar juntos\n\r[ 2 ] Jogar contra máquina\n\r[ 3 ] Configurações\n\r[ 4 ] Sair\n")
         opc = Option("Sua opção >>> ", 4)
+        sleep(0.5)
+        Restart()
 
         if opc == 1:
             pass
 
-        elif opc == 2:
+        if opc == 2:
             pass
 
-        elif opc == 3:
-            pass
+        if opc == 3:
+            print("*** CONFIGURAÇÕES ***")
+            print("\nO que deseja fazer?\n\r[ 1 ] Zerar pontuação\n\r[ 2 ] Mudar nomes\n\r[ 3 ] Resetar jogo")
+            opc = Option("Sua opção >>> ", 3)
+            sleep(0.5)
+            Restart()
 
-        elif opc == 4:
+            if opc == 1:
+                print("*** RESETANDO PONTUAÇÃO ***\n")
+                for c in range(5):
+                    print(".")
+                    sleep(0.5)
+                Score.write_data([score[0][0], 0], [score[1][0], 0], 0)
+                print("\nPontuação resetada.")
+                sleep(2)
+                Restart()
+
+            if opc == 2:
+                print("*** ALTERAÇÃO DOS NOMES ***\n")
+                score[0][0] = Name(1)
+                score[1][0] = Name(2)
+                sleep(2)
+                print("\n\nNomes alterados com sucesso.")
+                sleep(2)
+                Restart()
+
+            if opc == 3:
+                print("*** RESTAURANDO O JOGO ***")
+                for c in range(5):
+                    print(".")
+                    sleep(0.5)
+                Score.reset_game()
+                print("\nJogo restaurado.")
+                print("Reinicializando em...")
+                for c in range(3, 0, -1):
+                    print(c)
+                End()
+
+        if opc == 4:
             pass

@@ -28,5 +28,9 @@ class Score:
         file.write(f"PLAYER 01#{ player01[0] }#{ player01[1] }\nPLAYER 02#{ player02[0] }#{ player02[1] }\nMACHINE#{ machine }")
         file.close()
 
+    def reset_game():
+        pass
+
+
     # Para atualizar dados, chamar PlayerInfoGetter e levar apenas os dados que ficarão e os novos para WriteData
     # INCLUIR DATA DO JOGO NO SCORE
