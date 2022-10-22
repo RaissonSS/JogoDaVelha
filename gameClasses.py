@@ -1,7 +1,6 @@
 from txtFileClass import txtFile as Score
-from TreatedInputs import *
+from AUXsFuncs import *
 from time import sleep
-from os import system
 
 class Player:
     '''
@@ -38,12 +37,12 @@ class Game:  # é necessário que os métodos de verificação não alertem no t
     pode resetar a si próprio.
     '''
     
-    board = [ 1, 2, 3, 4, 5, 6, 7, 8, 9 ]
+    board = [ 1, 2, 3, 4, 5, 6, 7, 8, 9 ]  # TALVEZ O BOARD SEJA FEITO NA MAIN.PY
 
     def ShowBlackBoard():
         print("1 | 2 | 3\n- - - - -\n4 | 5 | 6\n- - - - -\n7 | 8 | 9")
     
-    def ShowBoard(places):
+    def ShowBoard(board):
         board_string = ""
         for enum, place in enumerate(board):
             enum += 1
@@ -111,15 +110,3 @@ class Menu:
         Score.WriteData([p1_name, 0], [p2_name, 0], 0)
         input("\nPressione ENTER para continuar... ")
         refresh()
-
-
-
-
-def refresh():  # limpa o terminal
-    system('cls')
-
-board = [ 0, 0, 1, 
-          0, 0, 1,
-          0, 0, 1 ]
-
-Game.ShowBoard(board)

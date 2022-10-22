@@ -1,3 +1,6 @@
+from os import system
+
+
 def Name(playerNumber):  # trata inputs destinados ao nome
     finished = False
     while finished != True:
@@ -10,3 +13,7 @@ def Name(playerNumber):  # trata inputs destinados ao nome
             finished = True
     print()
     return name.capitalize()
+
+
+def refresh():  # limpa o terminal
+    system('cls')
