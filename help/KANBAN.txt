@@ -1,15 +1,14 @@
 BACKLOG >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
-classe jogo
-classe filetxt
 classe máquina
 classe jogador
-main.py
 
 EM ANDAMENTO >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
-
+classe game
+main.py
 
 CONCLUÍDO >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
+classe filetxt
 

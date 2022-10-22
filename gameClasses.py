@@ -38,9 +38,26 @@ class Game:  # é necessário que os métodos de verificação não alertem no t
     pode resetar a si próprio.
     '''
     
-    board = [ [0, 0, 0],
-              [0, 0, 0],
-              [0, 0, 0] ]
+    board = [ 1, 2, 3, 4, 5, 6, 7, 8, 9 ]
+
+    def ShowBlackBoard():
+        print("1 | 2 | 3\n- - - - -\n4 | 5 | 6\n- - - - -\n7 | 8 | 9")
+    
+    def ShowBoard(places):
+        board_string = ""
+        for enum, place in enumerate(board):
+            enum += 1
+            if place == 0:
+                board_string += "O"
+            elif place == 1:
+                board_string += "X"
+            
+            if enum != 3 and enum != 6 and enum != 9:
+                board_string += " | "
+            if enum == 3 or enum == 6:
+                board_string += "\n- - - - -\n"
+        print(board_string)
+
 
     def SetPlace():
         pass
@@ -100,3 +117,9 @@ class Menu:
 
 def refresh():  # limpa o terminal
     system('cls')
+
+board = [ 0, 0, 1, 
+          0, 0, 1,
+          0, 0, 1 ]
+
+Game.ShowBoard(board)
