@@ -2,6 +2,10 @@ BACKLOG >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
 classe máquina
 classe jogador
+reestruturar descrição do projeto e README
+inteligência artifical para machine
+instancição do jogador
+instanciação da máquina
 
 EM ANDAMENTO >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
