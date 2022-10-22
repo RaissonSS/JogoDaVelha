@@ -15,5 +15,5 @@ def Name(playerNumber):  # trata inputs destinados ao nome
     return name.capitalize()
 
 
-def refresh():  # limpa o terminal
+def Refresh():  # limpa o terminal
     system('cls')

@@ -1,6 +1,6 @@
-class txtFile:
+class Score:
 
-    def ScoreVerifier():  # Realiza a abertura do score.txt e retorna sua existência
+    def score_verifier():  # Realiza a abertura do score.txt e retorna sua existência
         try:
             file = open("score.txt", "r")
         except:
@@ -9,7 +9,7 @@ class txtFile:
             file.close()
             return True
 
-    def PlayerInfoGetter():  # Retorna as informações contidas em score.txt
+    def player_info_getter():  # Retorna as informações contidas em score.txt
         file = open("score.txt", "r")
         lines = file.readlines()
         player01 = [lines[0].split("#")[1], lines[0].split("#")[2].replace("\n", "")]
@@ -23,7 +23,7 @@ class txtFile:
         file.close()
         return False'''  # MÉTODO ARQUIVADO / conflita com Menu.Opening()
 
-    def WriteData(player01, player02, machine):  # Escreve pontuações e nomes em score.txt
+    def write_data(player01, player02, machine):  # Escreve pontuações e nomes em score.txt
         file = open("score.txt", "w")
         file.write(f"PLAYER 01#{ player01[0] }#{ player01[1] }\nPLAYER 02#{ player02[0] }#{ player02[1] }\nMACHINE#{ machine }")
         file.close()
