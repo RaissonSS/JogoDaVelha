@@ -1,6 +1,6 @@
 from os import system
 
-def Name(playerNumber):  # trata inputs destinados ao nome
+def Name(playerNumber):  # Trata inputs destinados ao nome
     finished = False
     while finished != True:
         name = str(input(f"Digite o nome do { playerNumber }° jogador: ")).strip()
@@ -14,7 +14,7 @@ def Name(playerNumber):  # trata inputs destinados ao nome
     return name.capitalize()
 
 
-def Option(msg, max, min=1):
+def Option(msg, max, min=1):  # Trata inputs destinados a opções
     finished = False
     while finished != True:
         try:
@@ -29,5 +29,5 @@ def Option(msg, max, min=1):
     return x
             
 
-def Refresh():  # limpa o terminal
+def Refresh():  # Limpa o terminal
     system('cls')

@@ -42,7 +42,11 @@ class Game:  # é necessário que os métodos de verificação não alertem no t
     board = [ 1, 2, 3, 4, 5, 6, 7, 8, 9 ]  # TALVEZ O BOARD SEJA FEITO NA MAIN.PY
 
     def show_blanck_board():
+        # printa o tabuleiro em branco com os locais onde o jogador pode escolher jogar
         print("1 | 2 | 3\n- - - - -\n4 | 5 | 6\n- - - - -\n7 | 8 | 9")
+
+    # TROCAR show_blanck_board PARA QUE MOSTRE ONDE O JOGADOR PODE JOGAR MAS COM OS Xs e Os já marcados
+    # APENAS IMPLEMENTAR O METODO ABAIXO PARA ELSE (2) DIZER QUE PODE VIRAR O NÚMERO DE ACORDO COM O ENUM
     
     def show_board(board):
         board_string = ""
@@ -76,7 +80,7 @@ class Menu:
     se comunica diretamente com Player, Machine e Game para dar andamento ao jogo
     '''
 
-    def opening():  # inicia o jogo, chamando txtFile para verificar como proceder na abertura
+    def opening():  # Inicia o jogo, chamando txtFile para verificar como proceder na abertura
         print("*** JOGO DA VELHA ***")
         sleep(1)
         print("\nInicializando...")
@@ -107,7 +111,7 @@ class Menu:
         pass'''  # MÉTODO ARQUIVADO / inutilidade
 
 
-    def new_game():  # simula a iniciação do zero
+    def new_game():  # Simula a iniciação do zero
         print("*** JOGO DA VELHA ***")
         p1_name = Name(1)
         p2_name = Name(2)
@@ -117,7 +121,7 @@ class Menu:
         return [[p1_name, 0], [p2_name, 0], 0]
 
     
-    def game(score):
+    def game(score):  # Método principal da classe Menu que elabora todo o projeto
         while True:
             print("*** JOGO DA VELHA ***")
             print(f"\nBem vindos novamente { score[0][0] } e { score[1][0] }!\nO que desejam fazer?")
