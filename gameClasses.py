@@ -1,3 +1,5 @@
+from platform import machine
+from unicodedata import name
 from ScoreClass import *
 from AUXsFuncs import *
 from time import sleep
@@ -8,12 +10,12 @@ class Player:
     se comunica com a classe Game.
     '''
     
-    def __init__(self, name, score, places):  # MÉTODO CONSTRUTOR
+    def __init__(self, name, score):  # MÉTODO CONSTRUTOR
         self.name = name 
         self.score = score
-        self.places = places 
+        self.places = []
 
-    def escolher_lugar(self):
+    def choose_place(self):  # 
         '''
         realiza a escolha do local do jogador no tabuleiro.
         se comunica com ... para saber se o local é valido.
@@ -27,7 +29,13 @@ class Machine:
     funciona como a classe Player, mas aleatóriamente.
     é possivel simular uma inteligência artificial...
     '''
-    pass
+
+    def __init__(self, score):
+        self.score = score
+        self.places = []
+    
+    def choose_place(self):
+        pass
 
 
 
@@ -118,12 +126,37 @@ class Game:  # é necessário que os métodos de verificação não alertem no t
             return False, 2
         
 
-    def game():
-        pass
+    def game(score, board, multiplayer):
+        finish = Game.verify_game_state(board)
+
+        if multiplayer:
+            player01 = Player(score[0][0], score[0][1])
+            player02 = Player(score[1][0], score[1][1])
+            while finish[0] != True:
+                board = player01.choose_place()
+                board = player02.choose_place()
+                finish = Game.verify_game_state(board)
+                # player > choose_place (while true) > set_place
+            Game.end_game(finish[1])
+        else:
+            player = Player(score[0][0], score[0][1])
+            machine = Player(score[2])
+            while finish != True:
+                board = player.choose_place()
+                board = machine.choose_place()
+                finish = Game.verify_game_state(board)
+            Game.end_game(finish[1])
 
 
     def end_game():
+        # GRAVAR SCORE NOVO
         pass
+
+
+    def reset_board():
+        return [ 2, 2, 2,
+                 2, 2, 2,
+                 2, 2, 2 ]
 
 
 class Menu:
@@ -173,7 +206,7 @@ class Menu:
         return [[p1_name, 0], [p2_name, 0], 0]
 
     
-    def game(score):  # Método principal da classe Menu que elabora todo o projeto
+    def game(score, board):  # Método principal da classe Menu que elabora todo o projeto
         while True:
             print("*** JOGO DA VELHA ***")
             print(f"\nBem vindos novamente { score[0][0] } e { score[1][0] }!\nO que desejam fazer?")
@@ -183,10 +216,11 @@ class Menu:
             Refresh()
 
             if opc == 1:  # MULTIPLAYER
-                pass
+                Game.game(score, board, False)
 
             if opc == 2:  # CONTRA MÁQUINA
-                pass
+                # QUEM JOGA COM A MÁQUINA???
+                Game.game(score, board, True)
 
             if opc == 3:  # VER PONTUAÇÃO
                 print("*** PONTUAÇÃO ***\n")

@@ -11,5 +11,5 @@ board = [ 2, 2, 2,
           2, 2, 2,
           2, 2, 2 ]
 
-Menu.game(gameScore)  # Menu.game pode receber o score e o board
+Menu.game(gameScore, board)  # Menu.game pode receber o score e o board
 

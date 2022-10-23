@@ -34,16 +34,10 @@ a probabilidade de corrupção/confusão/irredutibilidade do código
 bons testes QA, besos ;)
 '''
 
-board = [ 2, 2, 2,
-          2, 2, 2,
-          2, 2, 2 ]
+board = [ 1, 2, 2,
+          2, 1, 2,
+          0, 0, 1 ]
 
-board = Game.set_place(board, 6, 0)[1]
 print(board)
-print(Game.verify_game_state(board))
-board = Game.set_place(board, 4, 0)[1]
+board = Game.reset_board()
 print(board)
-print(Game.verify_game_state(board))
-board = Game.set_place(board, 2, 0)[1]
-print(board)
-print(Game.verify_game_state(board))
