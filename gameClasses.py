@@ -61,12 +61,18 @@ class Game:  # é necessário que os métodos de verificação não alertem no t
         print(board_string)
 
 
-    def set_place(board, place_to_put):
-        if board[place_to_put[0]] == 2:
-            board[place_to_put[1]] = place_to_put[0]
+    def set_place(board, index, place):
+        if board[index] == 2:
+            board[index] = place
             return True, board
         else:
             return False, board
+        '''# [0] > valor / [1] > index
+        if board[place_to_put[1]] == 2:
+            board[place_to_put[1]] = place_to_put[0]
+            return True, board
+        else:
+            return False, board'''  # ANTIGO USO DO MÉTODO / errado e feio
             
 
     def verify_game_state(board):
@@ -107,6 +113,9 @@ class Game:  # é necessário que os métodos de verificação não alertem no t
             return  True, 1
         elif board[2] == 1 and board[4] == 1 and board[6] == 1:
             return  True, 1
+
+        else:
+            return False, 2
         
 
     def game():
@@ -239,13 +248,3 @@ class Menu:
                 quit()
         
             Refresh()
-
-'''Score.write_data(["Raisson", 3], ["Mariane", 5], 7)
-score = [["Raisson", 5], ["Mariane", 3], 10]'''
-# Menu.game(score)
-board = [ 1, 2, 2,
-          2, 1, 2,
-          2, 2, 1]
-
-print("TABULEIRO")
-Game.show_board(board)
