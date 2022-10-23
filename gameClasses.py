@@ -37,7 +37,7 @@ class Game:  # é necessário que os métodos de verificação não alertem no t
     pode resetar a si próprio.
     '''
     
-    board = [ 1, 2, 3, 4, 5, 6, 7, 8, 9 ]  # TALVEZ O BOARD SEJA FEITO NA MAIN.PY
+    # board = [ 1, 2, 3, 4, 5, 6, 7, 8, 9 ]  # TALVEZ O BOARD SEJA FEITO NA MAIN.PY
 
     '''def show_blanck_board():
         # printa o tabuleiro em branco com os locais onde o jogador pode escolher jogar
@@ -99,8 +99,19 @@ class Game:  # é necessário que os métodos de verificação não alertem no t
         elif board[2] == 1 and board[5] == 1 and board[8] == 1:
             return True, 1
 
-        # VERIFICAÇÃO DIAGONAL
+        elif board[0] == 0 and board[4] == 0 and board[8] == 0:  # VERIFICAÇÃO DIAGONAL
+            return  True, 0
+        elif board[2] == 0 and board[4] == 0 and board[6] == 0:
+            return  True, 0
+        elif board[0] == 1 and board[4] == 1 and board[8] == 1:
+            return  True, 1
+        elif board[2] == 1 and board[4] == 1 and board[6] == 1:
+            return  True, 1
         
+
+    def game():
+        pass
+
 
     def end_game():
         pass
