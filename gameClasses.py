@@ -1,6 +1,4 @@
-from pdb import Restart
-import sys
-from txtFileClass import Score
+from ScoreClass import *
 from AUXsFuncs import *
 from time import sleep
 

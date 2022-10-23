@@ -1,4 +1,4 @@
-from os import remove, path
+from os import remove
 
 class Score:
 
@@ -37,7 +37,6 @@ class Score:
             return False
         else:
             return True
-
 
     # Para atualizar dados, chamar PlayerInfoGetter e levar apenas os dados que ficarão e os novos para WriteData
     # INCLUIR DATA DO JOGO NO SCORE

@@ -1,4 +1,4 @@
-from gameClasses import *
+from GameClasses import *
 
 newGame = Menu.opening()
 
