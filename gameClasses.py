@@ -63,11 +63,46 @@ class Game:  # é necessário que os métodos de verificação não alertem no t
         print(board_string)
 
 
-    def set_place(board):
-        pass
+    def set_place(board, place_to_put):
+        if board[place_to_put[0]] == 2:
+            board[place_to_put[1]] = place_to_put[0]
+            return True, board
+        else:
+            return False, board
+            
 
-    def verify_game_state():
-        pass
+    def verify_game_state(board):
+        # PARA OTIMIZAR, UTILIZAR UM FOR COM O E 1 E VERIFICAR COM METADE DAS LINHAS
+        if board[0] == 0 and board[1] == 0 and board[2] == 0:  # VERIFICAÇÃO HORIZONTAL
+            return True, 0
+        elif board[3] == 0 and board[4] == 0 and board[5] == 0:
+            return True, 0
+        elif board[6] == 0 and board[7] == 0 and board[8] == 0:
+            return True, 0
+
+        elif board[0] == 1 and board[1] == 1 and board[2] == 1:
+            return True, 1
+        elif board[3] == 1 and board[4] == 1 and board[5] == 1:
+            return True, 1
+        elif board[6] == 1 and board[7] == 1 and board[8] == 1:
+            return True, 1
+
+        elif board[0] == 0 and board[3] == 0 and board[6] == 0:  # VERIFICAÇÃO VERTICAL
+            return True, 0
+        elif board[1] == 0 and board[4] == 0 and board[7] == 0:
+            return True, 0
+        elif board[2] == 0 and board[5] == 0 and board[8] == 0:
+            return True, 0
+
+        elif board[0] == 1 and board[3] == 1 and board[6] == 1:
+            return True, 1
+        elif board[1] == 1 and board[4] == 1 and board[7] == 1:
+            return True, 1
+        elif board[2] == 1 and board[5] == 1 and board[8] == 1:
+            return True, 1
+
+        # VERIFICAÇÃO DIAGONAL
+        
 
     def end_game():
         pass
