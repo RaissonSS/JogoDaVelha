@@ -1,3 +1,5 @@
+from os import remove, path
+
 class Score:
 
     def score_verifier():  # Realiza a abertura do score.txt e retorna sua existência
@@ -29,7 +31,12 @@ class Score:
         file.close()
 
     def reset_game():
-        pass
+        try:
+            remove("score.txt")
+        except:
+            return False
+        else:
+            return True
 
 
     # Para atualizar dados, chamar PlayerInfoGetter e levar apenas os dados que ficarão e os novos para WriteData

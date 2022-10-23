@@ -118,56 +118,81 @@ class Menu:
 
     
     def game(score):
-        print("*** JOGO DA VELHA ***")
-        print(f"\n\nBem vindos novamente { score[0][0] } e { score[1][0] }!\nO que desejam fazer?")
-        print(f"\r[ 1 ] Jogar juntos\n\r[ 2 ] Jogar contra máquina\n\r[ 3 ] Configurações\n\r[ 4 ] Sair\n")
-        opc = Option("Sua opção >>> ", 4)
-        sleep(0.5)
-        Restart()
-
-        if opc == 1:
-            pass
-
-        if opc == 2:
-            pass
-
-        if opc == 3:
-            print("*** CONFIGURAÇÕES ***")
-            print("\nO que deseja fazer?\n\r[ 1 ] Zerar pontuação\n\r[ 2 ] Mudar nomes\n\r[ 3 ] Resetar jogo")
-            opc = Option("Sua opção >>> ", 3)
+        while True:
+            print("*** JOGO DA VELHA ***")
+            print(f"\nBem vindos novamente { score[0][0] } e { score[1][0] }!\nO que desejam fazer?")
+            print(f"\r[ 1 ] Jogar juntos\n\r[ 2 ] Jogar contra máquina\n\r[ 3 ] Ver pontuação\n\r[ 4 ] Configurações\n\r[ 5 ] Sair\n")
+            opc = Option("Sua opção >>> ", 5)
             sleep(0.5)
-            Restart()
+            Refresh()
 
-            if opc == 1:
-                print("*** RESETANDO PONTUAÇÃO ***\n")
-                for c in range(5):
-                    print(".")
-                    sleep(0.5)
-                Score.write_data([score[0][0], 0], [score[1][0], 0], 0)
-                print("\nPontuação resetada.")
-                sleep(2)
-                Restart()
+            if opc == 1:  # MULTIPLAYER
+                pass
 
-            if opc == 2:
-                print("*** ALTERAÇÃO DOS NOMES ***\n")
-                score[0][0] = Name(1)
-                score[1][0] = Name(2)
-                sleep(2)
-                print("\n\nNomes alterados com sucesso.")
-                sleep(2)
-                Restart()
+            if opc == 2:  # CONTRA MÁQUINA
+                pass
 
-            if opc == 3:
-                print("*** RESTAURANDO O JOGO ***")
-                for c in range(5):
-                    print(".")
-                    sleep(0.5)
-                Score.reset_game()
-                print("\nJogo restaurado.")
-                print("Reinicializando em...")
-                for c in range(3, 0, -1):
+            if opc == 3:  # VER PONTUAÇÃO
+                print("*** PONTUAÇÃO ***\n")
+                print(f"{ score[0][0] } > { score[0][1] } pontos.\n{ score[1][0] } > { score[1][1] } pontos.\nMáquina > { score[2] } pontos.")
+                input("\n\nPressione ENTER para voltar...")
+
+            if opc == 4:  # CONFIG
+                print("*** CONFIGURAÇÕES ***")
+                print("\nO que deseja fazer?\n\r[ 1 ] Zerar pontuação\n\r[ 2 ] Mudar nomes\n\r[ 3 ] Resetar jogo")
+                opc = Option("Sua opção >>> ", 3)
+                sleep(0.5)
+                Refresh()
+
+                if opc == 1:  # RESENTANDO SCORE
+                    print("*** RESETANDO PONTUAÇÃO ***\n")
+                    for c in range(5):
+                        print(".")
+                        sleep(0.5)
+                    Score.write_data([score[0][0], 0], [score[1][0], 0], 0)
+                    score = Score.player_info_getter()
+                    print("\nPontuação resetada.")
+                    sleep(2)
+                    Refresh()
+
+                if opc == 2:  # ALTERANDO NOMES
+                    print("*** ALTERAÇÃO DOS NOMES ***\n")
+                    score[0][0] = Name(1)
+                    score[1][0] = Name(2)
+                    Score.write_data([score[0][0], score[0][1]], [score[1][0], score[1][1]], score[2])
+                    score = Score.player_info_getter()
+                    sleep(2)
+                    print("\nNomes alterados com sucesso.")
+                    sleep(2)
+                    Refresh()
+
+                if opc == 3:  # RESET
+                    print("*** RESTAURANDO O JOGO ***")
+                    for c in range(5):
+                        print(".")
+                        sleep(0.5)
+                    verification = Score.reset_game()
+                    if verification:
+                        print("\nJogo restaurado.")
+                        print("\nReinicializando em...")
+                        for c in range(3, 0, -1):
+                            print(c)
+                            sleep(1)
+                        quit()
+                    else:
+                        print("\nHouve um erro na tentativa de resetar o jogo...")
+                        sleep(2)
+                        Refresh()
+
+            if opc == 5:  # SAIR
+                print("*** FECHANDO ***\n")
+                for c in range(5, 0, -1):
                     print(c)
-                End()
+                    sleep(1)
+                quit()
+        
+            Refresh()
 
-        if opc == 4:
-            pass
+Score.write_data(["Raisson", 3], ["Mariane", 5], 7)
+score = [["Raisson", 5], ["Mariane", 3], 10]
+Menu.game(score)

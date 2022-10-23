@@ -31,6 +31,3 @@ def Option(msg, max, min=1):
 
 def Refresh():  # limpa o terminal
     system('cls')
-
-def End():
-    quit()
