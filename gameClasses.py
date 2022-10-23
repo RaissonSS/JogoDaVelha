@@ -41,12 +41,9 @@ class Game:  # é necessário que os métodos de verificação não alertem no t
     
     board = [ 1, 2, 3, 4, 5, 6, 7, 8, 9 ]  # TALVEZ O BOARD SEJA FEITO NA MAIN.PY
 
-    def show_blanck_board():
+    '''def show_blanck_board():
         # printa o tabuleiro em branco com os locais onde o jogador pode escolher jogar
-        print("1 | 2 | 3\n- - - - -\n4 | 5 | 6\n- - - - -\n7 | 8 | 9")
-
-    # TROCAR show_blanck_board PARA QUE MOSTRE ONDE O JOGADOR PODE JOGAR MAS COM OS Xs e Os já marcados
-    # APENAS IMPLEMENTAR O METODO ABAIXO PARA ELSE (2) DIZER QUE PODE VIRAR O NÚMERO DE ACORDO COM O ENUM
+        print("1 | 2 | 3\n- - - - -\n4 | 5 | 6\n- - - - -\n7 | 8 | 9")'''  # MÉTODO ARQUIVADO / substituido
     
     def show_board(board):
         board_string = ""
@@ -56,6 +53,8 @@ class Game:  # é necessário que os métodos de verificação não alertem no t
                 board_string += "O"
             elif place == 1:
                 board_string += "X"
+            else:
+                board_string += f"{ enum }"
             
             if enum != 3 and enum != 6 and enum != 9:
                 board_string += " | "
@@ -64,7 +63,7 @@ class Game:  # é necessário que os métodos de verificação não alertem no t
         print(board_string)
 
 
-    def set_place():
+    def set_place(board):
         pass
 
     def verify_game_state():
@@ -197,6 +196,12 @@ class Menu:
         
             Refresh()
 
-Score.write_data(["Raisson", 3], ["Mariane", 5], 7)
-score = [["Raisson", 5], ["Mariane", 3], 10]
-Menu.game(score)
+'''Score.write_data(["Raisson", 3], ["Mariane", 5], 7)
+score = [["Raisson", 5], ["Mariane", 3], 10]'''
+# Menu.game(score)
+board = [ 1, 2, 2,
+          2, 1, 2,
+          2, 2, 1]
+
+print("TABULEIRO")
+Game.show_board(board)

@@ -7,5 +7,9 @@ if newGame == False:
 else:
     gameScore = newGame
 
-Menu.game(gameScore)
+board = [ 2, 2, 2,
+          2, 2, 2,
+          2, 2, 2 ]
+
+Menu.game(gameScore)  # Menu.game pode receber o score e o board
 
