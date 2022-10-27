@@ -1,3 +1,4 @@
+from operator import indexOf
 from os import system
 
 def Name(playerNumber):  # Trata inputs destinados ao nome
@@ -27,7 +28,23 @@ def Option(msg, max, min=1):  # Trata inputs destinados a opções
             else:
                 finished = True
     return x
-            
+
+
+def BoardPlace(placesLeft):
+    finished = False
+    while finished != True:
+        try:
+            x = int(input("Sua opção: "))
+        except:
+            print("Digite um número!\n")
+        else:
+            if x not in placesLeft:
+                print("Lugar inválido!\n")
+            else:
+                index = placesLeft.index(x)
+                finished = True
+    return x, index
+
 
 def Refresh():  # Limpa o terminal
     system('cls')

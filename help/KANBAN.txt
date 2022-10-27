@@ -4,11 +4,12 @@ classe máquina
 classe jogador
 reestruturar descrição do projeto e README
 inteligência artifical para machine
-instancição do jogador
 instanciação da máquina
+possibilidade de escolher ser x e o
 
 EM ANDAMENTO >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
+instancição do jogador
 classe game
 main.py
 

@@ -1,7 +1,5 @@
-from platform import machine
-from unicodedata import name
-from ScoreClass import *
-from AUXsFuncs import *
+from scoreClass import *
+from auxiliaryFuncs import *
 from time import sleep
 
 class Player:
@@ -13,14 +11,28 @@ class Player:
     def __init__(self, name, score):  # MÉTODO CONSTRUTOR
         self.name = name 
         self.score = score
-        self.places = []
+        self.signal = 2
 
-    def choose_place(self):  # 
+    def choose_place(self, board):  # 
         '''
         realiza a escolha do local do jogador no tabuleiro.
         se comunica com ... para saber se o local é valido.
         '''
+        Refresh()
+        placesLeft = Game.places_left(board)
+        print(f"*** TURNO DE { self.name } ***\n")
+        Game.show_board(board)
+        placeChosen = BoardPlace(placesLeft)
+        board = Game.set_place(board, placeChosen[1], placeChosen[0])
+        return board
+
+    def change_signal():
+        # perguntar qual o sinal do primeiro jogador e atribuir o outro ao segundo
+        # isso é necessario para o set_place, pois ele precisa saber se é 0 ou 1 (o ou x) para por no tabuleiro
+        # é necessário também resolver um problema do index
         pass
+
+
         
 
 class Machine:
@@ -32,7 +44,6 @@ class Machine:
 
     def __init__(self, score):
         self.score = score
-        self.places = []
     
     def choose_place(self):
         pass
@@ -69,12 +80,16 @@ class Game:  # é necessário que os métodos de verificação não alertem no t
         print(board_string)
 
 
-    def set_place(board, index, place):
-        if board[index] == 2:
+    def set_place(board, index, place, player):
+        board[index] = place
+        return board
+
+        '''if board[index] == 2:
             board[index] = place
             return True, board
         else:
-            return False, board
+            return False, board'''  # Pode ser usado como controle ou logger
+
         '''# [0] > valor / [1] > index
         if board[place_to_put[1]] == 2:
             board[place_to_put[1]] = place_to_put[0]
@@ -123,35 +138,61 @@ class Game:  # é necessário que os métodos de verificação não alertem no t
             return  True, 1
 
         else:
-            return False, 2
+            if Game.tie_verifier(board):
+                return True, 3
+            else:
+                return False, 2
         
 
     def game(score, board, multiplayer):
         finish = Game.verify_game_state(board)
-
+        
         if multiplayer:
             player01 = Player(score[0][0], score[0][1])
             player02 = Player(score[1][0], score[1][1])
+
+            player01.change_signal() # ATENÇÃO
+
             while finish[0] != True:
-                board = player01.choose_place()
-                board = player02.choose_place()
+                input(f"1 - {board}")
+                board = player01.choose_place(board)
+                input(f"2 - {player01.name} - {board}")
+                board = player02.choose_place(board)
+                input(f"3 - {player02.name} - {board}")
                 finish = Game.verify_game_state(board)
-                # player > choose_place (while true) > set_place
             Game.end_game(finish[1])
+
         else:
             player = Player(score[0][0], score[0][1])
             machine = Player(score[2])
-            while finish != True:
-                board = player.choose_place()
-                board = machine.choose_place()
+
+            while finish[0] != True:
+                board = player.choose_place(board)
+                board = machine.choose_place(board)
                 finish = Game.verify_game_state(board)
             Game.end_game(finish[1])
+
+
+    def places_left(board):  # RETORNA UM ARRAY COM TODOS OS INDEXS DOS LUGARES DISPONIVEIS NO BOARD
+        places_left = []
+        for num, place in enumerate(board):
+            if place == 2:
+                places_left.append(num + 1)
+        return places_left
+
+
+    def tie_verifier(board):  # VERIFICA EMPATE NO JOGO
+        places_left = Game.places_left(board)
+        if len(places_left) == 0:
+            return True
+        else:
+            return False
 
 
     def end_game():
         # GRAVAR SCORE NOVO
+        # DEFINIR O FIM DO JOGO CASO 0, 1, 2 E 3 (O, X, NADA, EMPATE)
         pass
-
 
     def reset_board():
         return [ 2, 2, 2,
@@ -209,18 +250,18 @@ class Menu:
     def game(score, board):  # Método principal da classe Menu que elabora todo o projeto
         while True:
             print("*** JOGO DA VELHA ***")
-            print(f"\nBem vindos novamente { score[0][0] } e { score[1][0] }!\nO que desejam fazer?")
+            print(f"\nBem vindos { score[0][0] } e { score[1][0] }!\nO que desejam fazer?")
             print(f"\r[ 1 ] Jogar juntos\n\r[ 2 ] Jogar contra máquina\n\r[ 3 ] Ver pontuação\n\r[ 4 ] Configurações\n\r[ 5 ] Sair\n")
             opc = Option("Sua opção >>> ", 5)
             sleep(0.5)
             Refresh()
 
             if opc == 1:  # MULTIPLAYER
-                Game.game(score, board, False)
+                Game.game(score, board, True)
 
             if opc == 2:  # CONTRA MÁQUINA
                 # QUEM JOGA COM A MÁQUINA???
-                Game.game(score, board, True)
+                Game.game(score, board, False)
 
             if opc == 3:  # VER PONTUAÇÃO
                 print("*** PONTUAÇÃO ***\n")
@@ -229,8 +270,8 @@ class Menu:
 
             if opc == 4:  # CONFIG
                 print("*** CONFIGURAÇÕES ***")
-                print("\nO que deseja fazer?\n\r[ 1 ] Zerar pontuação\n\r[ 2 ] Mudar nomes\n\r[ 3 ] Resetar jogo")
-                opc = Option("Sua opção >>> ", 3)
+                print("\nO que deseja fazer?\n\r[ 1 ] Zerar pontuação\n\r[ 2 ] Mudar nomes\n\r[ 3 ] Resetar jogo\n\r[ 4 ] Voltar")
+                opc = Option("Sua opção >>> ", 4)
                 sleep(0.5)
                 Refresh()
 
@@ -274,9 +315,12 @@ class Menu:
                         sleep(2)
                         Refresh()
 
+                if opc == 4:  # VOLTAR
+                    Refresh()
+
             if opc == 5:  # SAIR
                 print("*** FECHANDO ***\n")
-                for c in range(5, 0, -1):
+                for c in range(3, 0, -1):
                     print(c)
                     sleep(1)
                 quit()

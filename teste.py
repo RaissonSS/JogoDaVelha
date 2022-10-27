@@ -1,6 +1,6 @@
-from ScoreClass import *
+from scoreClass import *
 from GameClasses import *
-from AUXsFuncs import *
+from auxiliaryFuncs import *
 
 '''
 não tem necessidade de copiar e colar todas as classes aqui.
@@ -34,10 +34,9 @@ a probabilidade de corrupção/confusão/irredutibilidade do código
 bons testes QA, besos ;)
 '''
 
-board = [ 1, 2, 2,
-          2, 1, 2,
-          0, 0, 1 ]
+board = [ 1, 1, 1,
+          1, 1, 1,
+          1, 1, 1 ]
 
-print(board)
-board = Game.reset_board()
-print(board)
+print(Game.places_left(board))
+print(f"1 - {board} - {type(board)}")
