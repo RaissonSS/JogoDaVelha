@@ -29,9 +29,8 @@ def Option(msg, max, min=1):  # Trata inputs destinados a opções
     return x
 
 
-def BoardPlace(placesLeft, playerSignal):  # Retorna o index do lugar escolhido no tabuleiro pelo jogador
+def BoardPlace(placesLeft):  # Retorna o index do lugar escolhido no tabuleiro pelo jogador
     finished = False
-    # oppositeSignal = 0 if playerSignal == 1 else 1
     while finished != True:
         try:
             x = int(input("Seu local: "))
@@ -61,7 +60,7 @@ def SignalChoice():  # Faz a escolha do sinal do jogador e retorna o número esc
                 finished = True
     return x
 
-def AgainstMachine(playersInfo):
+def AgainstMachine(playersInfo):  # Usuário escolhe qual jogador jogará contra a máquina
     print("*** CONTRA MÁQUINA ***")
     print(f"\nCom quem eu vou jogar?\n\r[ 1 ] { playersInfo[0][0] }\n\r[ 2 ] { playersInfo[1][0] }")
     while True:

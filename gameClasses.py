@@ -1,7 +1,7 @@
 from scoreClass import *
 from auxiliaryFuncs import *
 from time import sleep
-from random import randint, random
+from random import randint
 
 class Player:
     '''
@@ -21,6 +21,7 @@ class Player:
         '''
         Refresh()
         finished = Game.verify_game_state(board)
+        # Verifica se o jogo já foi vencido antes do próximo jogador jogar
         if finished[0]:
             return board, finished
 
@@ -49,15 +50,14 @@ class Machine:
     '''
     responsável por atuar como computador/máquina interagindo com o jogador aleatóriamente.
     funciona como a classe Player, mas aleatóriamente.
-    é possivel simular uma inteligência artificial...
     '''
 
-    def __init__(self, score):
+    def __init__(self, score):  # MÉTODO CONSTRUTOR
         self.score = score
         self.signal = 2
     
 
-    def choose_place(self, board):
+    def choose_place(self, board):  # MÉTODO ONDE A MÁQUINA ESCOLHE SEU LUGAR ALEATORIAMENTE
         finished = Game.verify_game_state(board)
         if finished[0]:
             Refresh()
@@ -65,6 +65,7 @@ class Machine:
 
         placesLeft = Game.places_left(board)
         while True:
+            # A máquina escolhe um lugar, que é verificado, até ser possível
             place = randint(1, 9)
             if place in placesLeft:
                 board = Game.set_place(board, placesLeft.index(place), self.signal)
@@ -72,7 +73,7 @@ class Machine:
                 return board, finished
         
     
-    def machine_playing():
+    def machine_playing():  # AVISA O JOGADOR QUE A MÁQUINA ESTÁ JOGANDO
         Refresh()
         print("*** MEU TURNO ***")
         print("\n\nEstou pensando...\n\n")
@@ -86,7 +87,7 @@ class Machine:
         self.signal = 1 if player.signal == 0 else 0
 
 
-class Game:  # é necessário que os métodos de verificação não alertem no terminal caso a MÁQUINA jogue (adaptar)
+class Game:
     '''
     responsável por controlar o tabuleiro, verificar local e se há vencedor ou empate.
     pode resetar a si próprio.
@@ -214,7 +215,7 @@ class Game:  # é necessário que os métodos de verificação não alertem no t
             return False
 
 
-    def end_game(winnerId, winners, multiplayer):
+    def end_game(winnerId, winners, multiplayer):  # MOSTRA MENSAGEM DE FINALIZAÇÃO DO JOGO
         # winnerId = 0 or 1 or 3
         # winners = [player, machine] or [player01, player02]
         # multiplayer = True or False
@@ -242,7 +243,7 @@ class Game:  # é necessário que os métodos de verificação não alertem no t
                 return 3
 
 
-    def game_conclusion(winner):
+    def game_conclusion(winner):  # CADASTRA DADOS DO VENCEDOR E ATUALIZA PONTUAÇÃO
         player01, player02, machine = Score.player_info_getter()
         if winner == 3:
             Score.write_data(player01, player02, machine + 1)
@@ -299,7 +300,7 @@ class Menu:
         return SignalChoice()
 
 
-    def new_game():  # Simula a iniciação do zero
+    def new_game():  # INICIA O JOGO DO ZERO
         print("*** JOGO DA VELHA ***")
         p1_name = Name(1)
         p2_name = Name(2)
@@ -309,7 +310,7 @@ class Menu:
         return [[p1_name, 0], [p2_name, 0], 0]
 
     
-    def game(score, board):  # Método principal da classe Menu que elabora todo o projeto
+    def game(score, board):  # MÉTODO MESTRE
         while True:
             print("*** JOGO DA VELHA ***")
             print(f"\nBem vindos { score[0][0] } e { score[1][0] }!\nO que desejam fazer?")
@@ -322,7 +323,6 @@ class Menu:
                 board = Game.game(score, board, True)
 
             if opc == 2:  # CONTRA MÁQUINA
-                # QUEM JOGA COM A MÁQUINA???
                 board = Game.game(score, board, False)
 
             if opc == 3:  # VER PONTUAÇÃO

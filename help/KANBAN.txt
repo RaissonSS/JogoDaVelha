@@ -1,16 +1,16 @@
 BACKLOG >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
-classe máquina
 reestruturar descrição do projeto e README
 inteligência artifical para machine
-instanciação da máquina
 
 EM ANDAMENTO >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
+classe máquina
 classe game
 
 CONCLUÍDO >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
+instanciação da máquina
 possibilidade de escolher ser x e o
 main.py
 classe filetxt
