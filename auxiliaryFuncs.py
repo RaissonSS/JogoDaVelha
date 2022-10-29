@@ -29,8 +29,9 @@ def Option(msg, max, min=1):  # Trata inputs destinados a opções
     return x
 
 
-def BoardPlace(placesLeft):  # Retorna o index do lugar escolhido no tabuleiro pelo jogador
+def BoardPlace(placesLeft, playerSignal):  # Retorna o index do lugar escolhido no tabuleiro pelo jogador
     finished = False
+    # oppositeSignal = 0 if playerSignal == 1 else 1
     while finished != True:
         try:
             x = int(input("Seu local: "))
@@ -39,6 +40,8 @@ def BoardPlace(placesLeft):  # Retorna o index do lugar escolhido no tabuleiro p
         else:
             if x not in placesLeft:
                 print("Lugar inválido!\n")
+            elif placesLeft[placesLeft.index(x)] == 0:  # VERIFICAR INTEGRAÇÃO COM O IF ACIMA
+                print("Lugar já ocupado\n")
             else:
                 index = placesLeft.index(x)
                 finished = True
