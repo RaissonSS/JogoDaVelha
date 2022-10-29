@@ -1,19 +1,18 @@
 BACKLOG >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
 classe máquina
-classe jogador
 reestruturar descrição do projeto e README
 inteligência artifical para machine
 instanciação da máquina
-possibilidade de escolher ser x e o
 
 EM ANDAMENTO >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
-instancição do jogador
 classe game
-main.py
 
 CONCLUÍDO >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
+possibilidade de escolher ser x e o
+main.py
 classe filetxt
-
+instancição do jogador
+classe jogador
