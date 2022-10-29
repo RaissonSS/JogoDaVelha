@@ -1,6 +1,7 @@
 from scoreClass import *
 from auxiliaryFuncs import *
 from time import sleep
+from random import randint, random
 
 class Player:
     '''
@@ -53,10 +54,14 @@ class Machine:
 
     def __init__(self, score):
         self.score = score
+        self.signal = 2
     
-    def choose_place(self):
-        pass
 
+    def machine_chose_place(placesLeft):
+        while True:
+            place = randint(1, 9)
+            if place in placesLeft:
+                return placesLeft.index(place)
 
 
 class Game:  # é necessário que os métodos de verificação não alertem no terminal caso a MÁQUINA jogue (adaptar)
