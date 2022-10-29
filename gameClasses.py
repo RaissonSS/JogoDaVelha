@@ -29,7 +29,7 @@ class Player:
         print(f"*** TURNO DE { self.name } ***\n")
         Game.show_board(board)
         print()
-        placeChosen = BoardPlace(placesLeft, self.signal)
+        placeChosen = BoardPlace(placesLeft)
         board = Game.set_place(board, placeChosen, self.signal)
         return board, finished
 
