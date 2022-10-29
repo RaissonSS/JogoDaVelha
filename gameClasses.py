@@ -154,7 +154,7 @@ class Game:  # é necessário que os métodos de verificação não alertem no t
         
 
     def game(score, board, multiplayer):  # EXECUTA O JOGO TÉCNICAMENTE
-        finish = Game.verify_game_state(board)
+        finished = Game.verify_game_state(board)
         
         if multiplayer:
             player01 = Player(score[0][0], score[0][1])
@@ -163,23 +163,26 @@ class Game:  # é necessário que os métodos de verificação não alertem no t
             player01.choose_signal()
             player02.defined_signal(player01)
 
-            while finish[0] != True:
+            while finished[0] != True:
                 board, finished = player01.choose_place(board)
-                if finished[0] == True:
-                    break
                 board, finished = player02.choose_place(board)
                 # finish = Game.verify_game_state(board)
-            Game.end_game(finish[1])
+            winner = Game.end_game(finished[1], [player01, player02], True)
 
         else:
             player = Player(score[0][0], score[0][1])
             machine = Player(score[2])
 
-            while finish[0] != True:
+            while finished[0] != True:
                 board = player.choose_place(board)
                 board = machine.choose_place(board)
-                finish = Game.verify_game_state(board)
-            Game.end_game(finish[1])
+                finished = Game.verify_game_state(board)
+            winner = Game.end_game(finished[1], [player, machine], False)
+
+        Game.game_conclusion(winner)
+        input("\n\nPressione ENTER para continuar...")
+        Game.show_board(board)
+        return Game.reset_board()
 
 
     def places_left(board):  # RETORNA UM ARRAY COM TODOS OS INDEXS DOS LUGARES DISPONIVEIS NO BOARD
@@ -200,11 +203,44 @@ class Game:  # é necessário que os métodos de verificação não alertem no t
             return False
 
 
-    def end_game():
-        # GRAVAR SCORE NOVO
-        # DEFINIR O FIM DO JOGO CASO 0, 1, 2 E 3 (O, X, NADA, EMPATE)
-        # RESETAR TABULEIRO
-        pass
+    def end_game(winnerId, winners, multiplayer):
+        # winnerId = 0 or 1 or 2
+        # winners = [player, machine] or [player01, player02]
+        # multiplayer = True or False
+        if multiplayer:
+            if winnerId == 2:
+                print("*** EMPATE ***")
+                print(f"\n\nParece que houve um empate entre vocês dois, { winners[0].name } e { winners[1].name }!\n\n")
+                return 2
+            else:
+                print(f"*** PARABÉNS { winners[0].name if winners[0].signal == winnerId else winners[1].name } ***")
+                print("\n\nVocê venceu essa jogada!\n\n")
+                return winners[0].name if winners[0].signal == winnerId else winners[1].name
+        else:
+            if winnerId == 2:
+                print("*** EMPATE ***")
+                print(f"\n\nParece que você empatou comigo { winners[0].name }!\n\n")
+                return 2
+            elif winnerId == winners[0].signal:
+                print(f"*** VOCÊ VENCEU { winners[0].name } ***")
+                print("\n\nVocê conseguiu me superar!\n\n")
+                return winners[0].name
+            else:
+                print(f"*** VOCÊ PERDEU { winners[0].name } ***")
+                print("\n\nEu fui mais esperto que você!\n\n")
+                return 3
+
+
+    def game_conclusion(winner):
+        player01, player02, machine = Score.player_info_getter()
+        if winner == 3:
+            Score.write_data(player01, player02, machine + 1)
+        else:
+            if player01[0] == winner:
+                Score.write_data([winner, player01[1] + 1], player02, machine)
+            else:
+                Score.write_data(player01, [winner, player02[1] + 1], machine)
+
 
     def reset_board():  # RESETA O TABULEIRO
         return [ 2, 2, 2,
@@ -274,11 +310,11 @@ class Menu:
             Refresh()
 
             if opc == 1:  # MULTIPLAYER
-                Game.game(score, board, True)
+                board = Game.game(score, board, True)
 
             if opc == 2:  # CONTRA MÁQUINA
                 # QUEM JOGA COM A MÁQUINA???
-                Game.game(score, board, False)
+                board = Game.game(score, board, False)
 
             if opc == 3:  # VER PONTUAÇÃO
                 print("*** PONTUAÇÃO ***\n")

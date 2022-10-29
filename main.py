@@ -12,3 +12,5 @@ board = [ 2, 2, 2,
           2, 2, 2 ]
 
 Menu.game(gameScore, board)
+
+# PROBLEMA NO verify_game_state

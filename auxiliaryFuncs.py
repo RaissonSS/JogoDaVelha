@@ -1,4 +1,3 @@
-from operator import indexOf
 from os import system
 
 def Name(playerNumber):  # Trata inputs destinados ao nome
@@ -49,7 +48,7 @@ def SignalChoice():  # Faz a escolha do sinal do jogador e retorna o número esc
     finished = False
     while finished != True:
         try:
-            x = int(input("\r[ 0 ] 'O'\n\r[ 1 ] 'X'\n\nSua escolha >>> "))
+            x = int(input("\r[ 0 ] O\n\r[ 1 ] X\n\nSua escolha >>> "))
         except:
             print("\nDigite um número!\n")
         else:

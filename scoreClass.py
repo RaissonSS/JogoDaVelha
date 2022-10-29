@@ -14,9 +14,9 @@ class Score:
     def player_info_getter():  # Retorna as informações contidas em score.txt
         file = open("score.txt", "r")
         lines = file.readlines()
-        player01 = [lines[0].split("#")[1], lines[0].split("#")[2].replace("\n", "")]
-        player02 = [lines[1].split("#")[1], lines[1].split("#")[2].replace("\n", "")]
-        machine = lines[2].split("#")[1]
+        player01 = [lines[0].split("#")[1], int(lines[0].split("#")[2].replace("\n", ""))]
+        player02 = [lines[1].split("#")[1], int(lines[1].split("#")[2].replace("\n", ""))]
+        machine = int(lines[2].split("#")[1])
         file.close()
         return player01, player02, machine
 
