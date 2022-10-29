@@ -204,11 +204,11 @@ class Game:  # é necessário que os métodos de verificação não alertem no t
 
 
     def end_game(winnerId, winners, multiplayer):
-        # winnerId = 0 or 1 or 2
+        # winnerId = 0 or 1 or 3
         # winners = [player, machine] or [player01, player02]
         # multiplayer = True or False
         if multiplayer:
-            if winnerId == 2:
+            if winnerId == 3:
                 print("*** EMPATE ***")
                 print(f"\n\nParece que houve um empate entre vocês dois, { winners[0].name } e { winners[1].name }!\n\n")
                 return 2
@@ -217,7 +217,7 @@ class Game:  # é necessário que os métodos de verificação não alertem no t
                 print("\n\nVocê venceu essa jogada!\n\n")
                 return winners[0].name if winners[0].signal == winnerId else winners[1].name
         else:
-            if winnerId == 2:
+            if winnerId == 3:
                 print("*** EMPATE ***")
                 print(f"\n\nParece que você empatou comigo { winners[0].name }!\n\n")
                 return 2
@@ -237,9 +237,11 @@ class Game:  # é necessário que os métodos de verificação não alertem no t
             Score.write_data(player01, player02, machine + 1)
         else:
             if player01[0] == winner:
-                Score.write_data([winner, player01[1] + 1], player02, machine)
+                Score.write_data([player01[0], player01[1] + 1], player02, machine)
+            elif player02[0] == winner:
+                Score.write_data(player01, [player02[0], player02[1] + 1], machine)
             else:
-                Score.write_data(player01, [winner, player02[1] + 1], machine)
+                pass  # EMPATE
 
 
     def reset_board():  # RESETA O TABULEIRO
@@ -317,6 +319,7 @@ class Menu:
                 board = Game.game(score, board, False)
 
             if opc == 3:  # VER PONTUAÇÃO
+                score = Score.player_info_getter()
                 print("*** PONTUAÇÃO ***\n")
                 print(f"{ score[0][0] } > { score[0][1] } pontos.\n{ score[1][0] } > { score[1][1] } pontos.\nMáquina > { score[2] } pontos.")
                 input("\n\nPressione ENTER para voltar...")
