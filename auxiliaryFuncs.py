@@ -30,11 +30,11 @@ def Option(msg, max, min=1):  # Trata inputs destinados a opções
     return x
 
 
-def BoardPlace(placesLeft):
+def BoardPlace(placesLeft):  # Retorna o index do lugar escolhido no tabuleiro pelo jogador
     finished = False
     while finished != True:
         try:
-            x = int(input("Sua opção: "))
+            x = int(input("Seu local: "))
         except:
             print("Digite um número!\n")
         else:
@@ -43,7 +43,21 @@ def BoardPlace(placesLeft):
             else:
                 index = placesLeft.index(x)
                 finished = True
-    return x, index
+    return index
+
+def SignalChoice():  # Faz a escolha do sinal do jogador e retorna o número escolhido
+    finished = False
+    while finished != True:
+        try:
+            x = int(input("\r[ 0 ] 'O'\n\r[ 1 ] 'X'\n\nSua escolha >>> "))
+        except:
+            print("\nDigite um número!\n")
+        else:
+            if x > 1 or x < 0:
+                print("\nDigite uma opção válida!\n")
+            else:
+                finished = True
+    return x
 
 
 def Refresh():  # Limpa o terminal

@@ -13,24 +13,33 @@ class Player:
         self.score = score
         self.signal = 2
 
-    def choose_place(self, board):  # 
+    def choose_place(self, board):  # MÉTODO ONDE O JOGADOR ESCOLHE SEU LUGAR NO TABULEIRO
         '''
         realiza a escolha do local do jogador no tabuleiro.
         se comunica com ... para saber se o local é valido.
         '''
         Refresh()
+        finished = Game.verify_game_state(board)
+        if finished[0]:
+            return board, finished
+
         placesLeft = Game.places_left(board)
         print(f"*** TURNO DE { self.name } ***\n")
         Game.show_board(board)
+        print()
         placeChosen = BoardPlace(placesLeft)
-        board = Game.set_place(board, placeChosen[1], placeChosen[0])
-        return board
+        board = Game.set_place(board, placeChosen, self.signal)
+        return board, finished
 
-    def change_signal():
-        # perguntar qual o sinal do primeiro jogador e atribuir o outro ao segundo
-        # isso é necessario para o set_place, pois ele precisa saber se é 0 ou 1 (o ou x) para por no tabuleiro
-        # é necessário também resolver um problema do index
-        pass
+    def choose_signal(self):  # ESCOLHA VOLUNTÁRIA DO SINAL DO JOGADOR
+        self.signal = Menu.choosing_signal(self.name)
+
+    def defined_signal(self, player01):  # ESCOLHA INVOLUNTÁRIA DO SINAL DO JOGADOR
+        # MOSTRAR QUE ESSE JOGADOR RECEBEU ESSE SINAL OBRIGATORIAMENTE
+        if player01.signal == 1:
+            self.signal = 0
+        else:
+            self.signal = 1
 
 
         
@@ -62,7 +71,7 @@ class Game:  # é necessário que os métodos de verificação não alertem no t
         # printa o tabuleiro em branco com os locais onde o jogador pode escolher jogar
         print("1 | 2 | 3\n- - - - -\n4 | 5 | 6\n- - - - -\n7 | 8 | 9")'''  # MÉTODO ARQUIVADO / substituido
     
-    def show_board(board):
+    def show_board(board):  # MOSTRA O TABULEIRO
         board_string = ""
         for enum, place in enumerate(board):
             enum += 1
@@ -80,8 +89,8 @@ class Game:  # é necessário que os métodos de verificação não alertem no t
         print(board_string)
 
 
-    def set_place(board, index, place, player):
-        board[index] = place
+    def set_place(board, index, player_signal):  # DEFINE LUGAR NO TABULEIRO
+        board[index] = player_signal
         return board
 
         '''if board[index] == 2:
@@ -98,7 +107,7 @@ class Game:  # é necessário que os métodos de verificação não alertem no t
             return False, board'''  # ANTIGO USO DO MÉTODO / errado e feio
             
 
-    def verify_game_state(board):
+    def verify_game_state(board):  # VERIFICA O STATUS DE VITÓRIA, EMPATE E CONTINUAÇÃO DO JOGO
         # PARA OTIMIZAR, UTILIZAR UM FOR COM O E 1 E VERIFICAR COM METADE DAS LINHAS
         if board[0] == 0 and board[1] == 0 and board[2] == 0:  # VERIFICAÇÃO HORIZONTAL
             return True, 0
@@ -144,22 +153,22 @@ class Game:  # é necessário que os métodos de verificação não alertem no t
                 return False, 2
         
 
-    def game(score, board, multiplayer):
+    def game(score, board, multiplayer):  # EXECUTA O JOGO TÉCNICAMENTE
         finish = Game.verify_game_state(board)
         
         if multiplayer:
             player01 = Player(score[0][0], score[0][1])
             player02 = Player(score[1][0], score[1][1])
 
-            player01.change_signal() # ATENÇÃO
+            player01.choose_signal()
+            player02.defined_signal(player01)
 
             while finish[0] != True:
-                input(f"1 - {board}")
-                board = player01.choose_place(board)
-                input(f"2 - {player01.name} - {board}")
-                board = player02.choose_place(board)
-                input(f"3 - {player02.name} - {board}")
-                finish = Game.verify_game_state(board)
+                board, finished = player01.choose_place(board)
+                if finished[0] == True:
+                    break
+                board, finished = player02.choose_place(board)
+                # finish = Game.verify_game_state(board)
             Game.end_game(finish[1])
 
         else:
@@ -178,12 +187,14 @@ class Game:  # é necessário que os métodos de verificação não alertem no t
         for num, place in enumerate(board):
             if place == 2:
                 places_left.append(num + 1)
+            else:
+                places_left.append(0)
         return places_left
 
 
     def tie_verifier(board):  # VERIFICA EMPATE NO JOGO
         places_left = Game.places_left(board)
-        if len(places_left) == 0:
+        if sum(places_left) == 0:
             return True
         else:
             return False
@@ -192,9 +203,10 @@ class Game:  # é necessário que os métodos de verificação não alertem no t
     def end_game():
         # GRAVAR SCORE NOVO
         # DEFINIR O FIM DO JOGO CASO 0, 1, 2 E 3 (O, X, NADA, EMPATE)
+        # RESETAR TABULEIRO
         pass
 
-    def reset_board():
+    def reset_board():  # RESETA O TABULEIRO
         return [ 2, 2, 2,
                  2, 2, 2,
                  2, 2, 2 ]
@@ -231,6 +243,11 @@ class Menu:
             input("\n\nPressione ENTER para continuar... ")
             Refresh()
             return ScoreData
+
+
+    def choosing_signal(name):  # MÉTODO PARA O JOGADOR ESCOLHER SEU SINAL
+        print(f"*** Escolha seu sinal, { name } ***")
+        return SignalChoice()
 
 
     '''def ContinueGame():
