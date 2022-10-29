@@ -57,11 +57,33 @@ class Machine:
         self.signal = 2
     
 
-    def machine_chose_place(placesLeft):
+    def choose_place(self, board):
+        finished = Game.verify_game_state(board)
+        if finished[0]:
+            Refresh()
+            return board, finished
+
+        placesLeft = Game.places_left(board)
         while True:
             place = randint(1, 9)
             if place in placesLeft:
-                return placesLeft.index(place)
+                board = Game.set_place(board, placesLeft.index(place), self.signal)
+                Machine.machine_playing()
+                return board, finished
+        
+    
+    def machine_playing():
+        Refresh()
+        print("*** MEU TURNO ***")
+        print("\n\nEstou pensando...\n\n")
+        sleep(1)
+        print("Joguei!")
+        sleep(1)
+        Refresh()
+
+    
+    def choose_signal(self, player):
+        self.signal = 1 if player.signal == 0 else 0
 
 
 class Game:  # é necessário que os métodos de verificação não alertem no terminal caso a MÁQUINA jogue (adaptar)
@@ -152,16 +174,19 @@ class Game:  # é necessário que os métodos de verificação não alertem no t
             while finished[0] != True:
                 board, finished = player01.choose_place(board)
                 board, finished = player02.choose_place(board)
-                # finish = Game.verify_game_state(board)
             winner = Game.end_game(finished[1], [player01, player02], True)
 
         else:
-            player = Player(score[0][0], score[0][1])
-            machine = Player(score[2])
+            player = AgainstMachine(score)
+            player = Player(player[0], player[1])
+            machine = Machine(score[2])
+
+            player.choose_signal()
+            machine.choose_signal(player)
 
             while finished[0] != True:
-                board = player.choose_place(board)
-                board = machine.choose_place(board)
+                board, finished = player.choose_place(board)
+                board, finished = machine.choose_place(board)
                 finished = Game.verify_game_state(board)
             winner = Game.end_game(finished[1], [player, machine], False)
 
@@ -196,24 +221,24 @@ class Game:  # é necessário que os métodos de verificação não alertem no t
         if multiplayer:
             if winnerId == 3:
                 print("*** EMPATE ***")
-                print(f"\n\nParece que houve um empate entre vocês dois, { winners[0].name } e { winners[1].name }!\n\n")
+                print(f"\n\nParece que houve um empate entre vocês dois, { winners[0].name } e { winners[1].name }!")
                 return 2
             else:
                 print(f"*** PARABÉNS { winners[0].name if winners[0].signal == winnerId else winners[1].name } ***")
-                print("\n\nVocê venceu essa jogada!\n\n")
+                print("\n\nVocê venceu essa jogada!")
                 return winners[0].name if winners[0].signal == winnerId else winners[1].name
         else:
             if winnerId == 3:
                 print("*** EMPATE ***")
-                print(f"\n\nParece que você empatou comigo { winners[0].name }!\n\n")
+                print(f"\n\nParece que você empatou comigo { winners[0].name }!")
                 return 2
             elif winnerId == winners[0].signal:
                 print(f"*** VOCÊ VENCEU { winners[0].name } ***")
-                print("\n\nVocê conseguiu me superar!\n\n")
+                print("\n\nVocê conseguiu me superar!")
                 return winners[0].name
             else:
                 print(f"*** VOCÊ PERDEU { winners[0].name } ***")
-                print("\n\nEu fui mais esperto que você!\n\n")
+                print("\n\nEu fui mais esperto que você!")
                 return 3
 
 

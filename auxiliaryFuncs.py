@@ -61,6 +61,26 @@ def SignalChoice():  # Faz a escolha do sinal do jogador e retorna o número esc
                 finished = True
     return x
 
+def AgainstMachine(playersInfo):
+    print("*** CONTRA MÁQUINA ***")
+    print(f"\nCom quem eu vou jogar?\n\r[ 1 ] { playersInfo[0][0] }\n\r[ 2 ] { playersInfo[1][0] }")
+    while True:
+        try:
+            x = int(input("Quem é você? "))
+        except:
+            print("\nDigite um número!\n")
+        else:
+            if 1 < x < 2:
+                print("\nDigite uma opção válida!\n")
+            else:
+                break
+    Refresh()
+    
+    if x == 1:
+        return playersInfo[0]
+    else:
+        return playersInfo[1]
+
 
 def Refresh():  # Limpa o terminal
     system('cls')
