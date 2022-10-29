@@ -20,10 +20,6 @@ class Score:
         file.close()
         return player01, player02, machine
 
-    '''def CreateScore():
-        file = open("score.txt", "w")
-        file.close()
-        return False'''  # MÉTODO ARQUIVADO / conflita com Menu.Opening()
 
     def write_data(player01, player02, machine):  # Escreve pontuações e nomes em score.txt
         file = open("score.txt", "w")
@@ -38,5 +34,5 @@ class Score:
         else:
             return True
 
-    # Para atualizar dados, chamar PlayerInfoGetter e levar apenas os dados que ficarão e os novos para WriteData
     # INCLUIR DATA DO JOGO NO SCORE
+    # INCLUIR DADOS COMO DATA, N° DE EMPATES E OUTROS NA QUARTA LINHA A MAIS PARA NÃO CONFLITAR COM OS SCORES

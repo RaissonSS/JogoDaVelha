@@ -65,12 +65,6 @@ class Game:  # é necessário que os métodos de verificação não alertem no t
     pode resetar a si próprio.
     '''
     
-    # board = [ 1, 2, 3, 4, 5, 6, 7, 8, 9 ]  # TALVEZ O BOARD SEJA FEITO NA MAIN.PY
-
-    '''def show_blanck_board():
-        # printa o tabuleiro em branco com os locais onde o jogador pode escolher jogar
-        print("1 | 2 | 3\n- - - - -\n4 | 5 | 6\n- - - - -\n7 | 8 | 9")'''  # MÉTODO ARQUIVADO / substituido
-    
     def show_board(board):  # MOSTRA O TABULEIRO
         board_string = ""
         for enum, place in enumerate(board):
@@ -92,19 +86,6 @@ class Game:  # é necessário que os métodos de verificação não alertem no t
     def set_place(board, index, player_signal):  # DEFINE LUGAR NO TABULEIRO
         board[index] = player_signal
         return board
-
-        '''if board[index] == 2:
-            board[index] = place
-            return True, board
-        else:
-            return False, board'''  # Pode ser usado como controle ou logger
-
-        '''# [0] > valor / [1] > index
-        if board[place_to_put[1]] == 2:
-            board[place_to_put[1]] = place_to_put[0]
-            return True, board
-        else:
-            return False, board'''  # ANTIGO USO DO MÉTODO / errado e feio
             
 
     def verify_game_state(board):  # VERIFICA O STATUS DE VITÓRIA, EMPATE E CONTINUAÇÃO DO JOGO
@@ -286,10 +267,6 @@ class Menu:
     def choosing_signal(name):  # MÉTODO PARA O JOGADOR ESCOLHER SEU SINAL
         print(f"*** Escolha seu sinal, { name } ***")
         return SignalChoice()
-
-
-    '''def ContinueGame():
-        pass'''  # MÉTODO ARQUIVADO / inutilidade
 
 
     def new_game():  # Simula a iniciação do zero
