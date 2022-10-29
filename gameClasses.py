@@ -314,7 +314,7 @@ class Menu:
         while True:
             print("*** JOGO DA VELHA ***")
             print(f"\nBem vindos { score[0][0] } e { score[1][0] }!\nO que desejam fazer?")
-            print(f"\r[ 1 ] Jogar juntos\n\r[ 2 ] Jogar contra máquina\n\r[ 3 ] Ver pontuação\n\r[ 4 ] Configurações\n\r[ 5 ] Sair\n")
+            print(f"\r[ 1 ] Jogar juntos\n\r[ 2 ] Jogar contra máquina\n\r[ 3 ] Ver pontuação\n\r[ 4 ] Configurações\n\r[ 5 ] Informações\n\r[ 6 ] Sair\n")
             opc = Option("Sua opção >>> ", 5)
             sleep(0.5)
             Refresh()
@@ -381,7 +381,15 @@ class Menu:
                 if opc == 4:  # VOLTAR
                     Refresh()
 
-            if opc == 5:  # SAIR
+            if opc == 5:  # INFORMAÇÕES
+                print("*** INFORMAÇÕES ***")
+                print("\nJogo da Velha - Versão 1.0\nDesenvolvedor: Raisson Souza\nTester: Mariane Pigato")
+                print("\nVersão 1.0\n\r- Jogo completo")
+                print("\nVersão 2.0\n\r- Inteligência Artificial")
+                print("\nGitHub: github.com/RaissonSS")
+                input("\n\nPressione ENTER para voltar...")
+
+            if opc == 6:  # SAIR
                 print("*** FECHANDO ***\n")
                 for c in range(3, 0, -1):
                     print(c)
