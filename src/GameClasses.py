@@ -1,5 +1,5 @@
-from scoreClass import *
-from auxiliaryFuncs import *
+from src.ScoreClass import *
+from auxiliary.AuxiliaryFuncs import *
 from time import sleep
 from random import randint
 
@@ -43,8 +43,6 @@ class Player:
         else:
             self.signal = 1
 
-
-        
 
 class Machine:
     '''
@@ -320,7 +318,7 @@ class Menu:
             print("*** JOGO DA VELHA ***")
             print(f"\nBem vindos { score[0][0] } e { score[1][0] }!\nO que desejam fazer?")
             print(f"\r[ 1 ] Jogar juntos\n\r[ 2 ] Jogar contra máquina\n\r[ 3 ] Ver pontuação\n\r[ 4 ] Configurações\n\r[ 5 ] Informações\n\r[ 6 ] Sair\n")
-            opc = Option("Sua opção >>> ", 5)
+            opc = Option("Sua opção >>> ", 6)
             sleep(0.5)
             Refresh()
 

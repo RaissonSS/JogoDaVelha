@@ -1,4 +1,4 @@
-from GameClasses import *
+from src.GameClasses import Menu
 
 newGame = Menu.opening()  # Faz a abertura e verificação do arquivo score.txt
 
