@@ -54,7 +54,6 @@ class Machine:
         self.score = score
         self.signal = 2
     
-
     def choose_place(self, board):  # MÉTODO ONDE A MÁQUINA ESCOLHE SEU LUGAR ALEATORIAMENTE
         finished = Game.verify_game_state(board)
         if finished[0]:
@@ -69,8 +68,10 @@ class Machine:
                 board = Game.set_place(board, placesLeft.index(place), self.signal)
                 Machine.machine_playing()
                 return board, finished
-        
     
+    def intelligence_place(self, board):
+        pass
+        
     def machine_playing():  # AVISA O JOGADOR QUE A MÁQUINA ESTÁ JOGANDO
         Refresh()
         print("*** MEU TURNO ***")
@@ -80,7 +81,6 @@ class Machine:
         sleep(1)
         Refresh()
 
-    
     def choose_signal(self, player):
         self.signal = 1 if player.signal == 0 else 0
 
@@ -108,11 +108,9 @@ class Game:
                 board_string += "\n- - - - -\n"
         print(board_string)
 
-
     def set_place(board, index, player_signal):  # DEFINE LUGAR NO TABULEIRO
         board[index] = player_signal
-        return board
-            
+        return board   
 
     def verify_game_state(board):  # VERIFICA O STATUS DE VITÓRIA, EMPATE E CONTINUAÇÃO DO JOGO
         # PARA OTIMIZAR, UTILIZAR UM FOR COM O E 1 E VERIFICAR COM METADE DAS LINHAS
@@ -158,7 +156,6 @@ class Game:
                 return True, 3
             else:
                 return False, 2
-        
 
     def game(score, board, multiplayer):  # EXECUTA O JOGO TÉCNICAMENTE
         finished = Game.verify_game_state(board)
@@ -194,7 +191,6 @@ class Game:
         Game.show_board(board)
         return Game.reset_board()
 
-
     def places_left(board):  # RETORNA UM ARRAY COM TODOS OS INDEXS DOS LUGARES DISPONIVEIS NO BOARD
         places_left = []
         for num, place in enumerate(board):
@@ -204,14 +200,12 @@ class Game:
                 places_left.append(0)
         return places_left
 
-
     def tie_verifier(board):  # VERIFICA EMPATE NO JOGO
         places_left = Game.places_left(board)
         if sum(places_left) == 0:
             return True
         else:
             return False
-
 
     def end_game(winnerId, winners, multiplayer, board):  # MOSTRA MENSAGEM DE FINALIZAÇÃO DO JOGO
         # winnerId = 0 or 1 or 3
@@ -245,7 +239,6 @@ class Game:
                 print("\n\nEu fui mais esperto que você!")
                 return 3
 
-
     def game_conclusion(winner):  # CADASTRA DADOS DO VENCEDOR E ATUALIZA PONTUAÇÃO
         player01, player02, machine = Score.player_info_getter()
         if winner == 3:
@@ -257,7 +250,6 @@ class Game:
                 Score.write_data(player01, [player02[0], player02[1] + 1], machine)
             else:
                 pass  # EMPATE
-
 
     def reset_board():  # RESETA O TABULEIRO
         return [ 2, 2, 2,
@@ -297,11 +289,9 @@ class Menu:
             Refresh()
             return ScoreData
 
-
     def choosing_signal(name):  # MÉTODO PARA O JOGADOR ESCOLHER SEU SINAL
         print(f"*** Escolha seu sinal, { name } ***")
         return SignalChoice()
-
 
     def new_game():  # INICIA O JOGO DO ZERO
         print("*** JOGO DA VELHA ***")
@@ -312,7 +302,6 @@ class Menu:
         Refresh()
         return [[p1_name, 0], [p2_name, 0], 0]
 
-    
     def game(score, board):  # MÉTODO MESTRE
         while True:
             print("*** JOGO DA VELHA ***")
