@@ -1,15 +1,15 @@
 BACKLOG >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
-reestruturar descrição do projeto e README
 inteligência artifical para machine
 
 EM ANDAMENTO >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
-classe máquina
-classe game
+reestruturar descrição do projeto e README
 
 CONCLUÍDO >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
+classe game
+classe máquina
 instanciação da máquina
 possibilidade de escolher ser x e o
 main.py

@@ -175,7 +175,7 @@ class Game:
             while finished[0] != True:
                 board, finished = player01.choose_place(board)
                 board, finished = player02.choose_place(board)
-            winner = Game.end_game(finished[1], [player01, player02], True)
+            winner = Game.end_game(finished[1], [player01, player02], True, board)
 
         else:
             player = AgainstMachine(score)
@@ -189,7 +189,7 @@ class Game:
                 board, finished = player.choose_place(board)
                 board, finished = machine.choose_place(board)
                 finished = Game.verify_game_state(board)
-            winner = Game.end_game(finished[1], [player, machine], False)
+            winner = Game.end_game(finished[1], [player, machine], False, board)
 
         Game.game_conclusion(winner)
         input("\n\nPressione ENTER para continuar...")
@@ -215,30 +215,35 @@ class Game:
             return False
 
 
-    def end_game(winnerId, winners, multiplayer):  # MOSTRA MENSAGEM DE FINALIZAÇÃO DO JOGO
+    def end_game(winnerId, winners, multiplayer, board):  # MOSTRA MENSAGEM DE FINALIZAÇÃO DO JOGO
         # winnerId = 0 or 1 or 3
         # winners = [player, machine] or [player01, player02]
         # multiplayer = True or False
         if multiplayer:
             if winnerId == 3:
-                print("*** EMPATE ***")
+                print("*** EMPATE ***\n")
+                Game.show_board(board)
                 print(f"\n\nParece que houve um empate entre vocês dois, { winners[0].name } e { winners[1].name }!")
                 return 2
             else:
-                print(f"*** PARABÉNS { winners[0].name if winners[0].signal == winnerId else winners[1].name } ***")
+                print(f"*** PARABÉNS { winners[0].name if winners[0].signal == winnerId else winners[1].name } ***\n")
+                Game.show_board(board)
                 print("\n\nVocê venceu essa jogada!")
                 return winners[0].name if winners[0].signal == winnerId else winners[1].name
         else:
             if winnerId == 3:
-                print("*** EMPATE ***")
+                print("*** EMPATE ***\n")
+                Game.show_board(board)
                 print(f"\n\nParece que você empatou comigo { winners[0].name }!")
                 return 2
             elif winnerId == winners[0].signal:
-                print(f"*** VOCÊ VENCEU { winners[0].name } ***")
+                print(f"*** VOCÊ VENCEU { winners[0].name } ***\n")
+                Game.show_board(board)
                 print("\n\nVocê conseguiu me superar!")
                 return winners[0].name
             else:
-                print(f"*** VOCÊ PERDEU { winners[0].name } ***")
+                print(f"*** VOCÊ PERDEU { winners[0].name } ***\n")
+                Game.show_board(board)
                 print("\n\nEu fui mais esperto que você!")
                 return 3
 

@@ -1,2 +1,4 @@
-Este projeto é um jogo da velha feito em Python utilizando classes e manipulação de arquivos de texto.
-Trabalho da faculdade ( 2° semestre de Sistemas de Informação ).
+Este projeto é um trabalho da faculdade na qual fiz um jogo da velha no console com Python.
+Foi utilizado classes e manipulação de arquivos txt.
+
+Nesse jogo da velha você pode jogar contra um amigo ou contra a máquina.
