@@ -76,9 +76,9 @@ class Machine:
         Refresh()
         print("*** MEU TURNO ***")
         print("\n\nEstou pensando...\n\n")
-        sleep(1)
+        sleep(0.5)
         print("Joguei!")
-        sleep(1)
+        sleep(0.5)
         Refresh()
 
     def choose_signal(self, player):
@@ -113,43 +113,25 @@ class Game:
         return board   
 
     def verify_game_state(board):  # VERIFICA O STATUS DE VITÓRIA, EMPATE E CONTINUAÇÃO DO JOGO
-        # PARA OTIMIZAR, UTILIZAR UM FOR COM O E 1 E VERIFICAR COM METADE DAS LINHAS
-        if board[0] == 0 and board[1] == 0 and board[2] == 0:  # VERIFICAÇÃO HORIZONTAL
-            return True, 0
-        elif board[3] == 0 and board[4] == 0 and board[5] == 0:
-            return True, 0
-        elif board[6] == 0 and board[7] == 0 and board[8] == 0:
-            return True, 0
+        for num in range(0, 2):
+            if board[0] == num and board[1] == num and board[2] == num:  # VERIFICAÇÃO HORIZONTAL
+                return True, num
+            elif board[3] == num and board[4] == num and board[5] == num:
+                return True, num
+            elif board[6] == num and board[7] == num and board[8] == num:
+                return True, num
 
-        elif board[0] == 1 and board[1] == 1 and board[2] == 1:
-            return True, 1
-        elif board[3] == 1 and board[4] == 1 and board[5] == 1:
-            return True, 1
-        elif board[6] == 1 and board[7] == 1 and board[8] == 1:
-            return True, 1
+            elif board[0] == num and board[3] == num and board[6] == num:  # VERIFICAÇÃO VERTICAL
+                return True, num
+            elif board[1] == num and board[4] == num and board[7] == num:
+                return True, num
+            elif board[2] == num and board[5] == num and board[8] == num:
+                return True, num
 
-        elif board[0] == 0 and board[3] == 0 and board[6] == 0:  # VERIFICAÇÃO VERTICAL
-            return True, 0
-        elif board[1] == 0 and board[4] == 0 and board[7] == 0:
-            return True, 0
-        elif board[2] == 0 and board[5] == 0 and board[8] == 0:
-            return True, 0
-
-        elif board[0] == 1 and board[3] == 1 and board[6] == 1:
-            return True, 1
-        elif board[1] == 1 and board[4] == 1 and board[7] == 1:
-            return True, 1
-        elif board[2] == 1 and board[5] == 1 and board[8] == 1:
-            return True, 1
-
-        elif board[0] == 0 and board[4] == 0 and board[8] == 0:  # VERIFICAÇÃO DIAGONAL
-            return  True, 0
-        elif board[2] == 0 and board[4] == 0 and board[6] == 0:
-            return  True, 0
-        elif board[0] == 1 and board[4] == 1 and board[8] == 1:
-            return  True, 1
-        elif board[2] == 1 and board[4] == 1 and board[6] == 1:
-            return  True, 1
+            elif board[0] == num and board[4] == num and board[8] == num:  # VERIFICAÇÃO DIAGONAL
+                return  True, num
+            elif board[2] == num and board[4] == num and board[6] == num:
+                return  True, num
 
         else:
             if Game.tie_verifier(board):
