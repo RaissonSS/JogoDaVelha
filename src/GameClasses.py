@@ -12,6 +12,7 @@ class Player:
     def __init__(self, name, score):  # MÉTODO CONSTRUTOR
         self.name = name 
         self.score = score
+        self.machine = False
         self.signal = 2
 
     def choose_place(self, board):  # MÉTODO ONDE O JOGADOR ESCOLHE SEU LUGAR NO TABULEIRO
@@ -36,9 +37,8 @@ class Player:
     def choose_signal(self):  # ESCOLHA VOLUNTÁRIA DO SINAL DO JOGADOR
         self.signal = Menu.choosing_signal(self.name)
 
-    def defined_signal(self, player01):  # ESCOLHA INVOLUNTÁRIA DO SINAL DO JOGADOR
-        # MOSTRAR QUE ESSE JOGADOR RECEBEU ESSE SINAL OBRIGATORIAMENTE
-        if player01.signal == 1:
+    def defined_signal(self, player):  # ESCOLHA INVOLUNTÁRIA DO SINAL DO JOGADOR
+        if player.signal == 1:
             self.signal = 0
         else:
             self.signal = 1
@@ -52,6 +52,7 @@ class Machine:
 
     def __init__(self, score):  # MÉTODO CONSTRUTOR
         self.score = score
+        self.machine = True
         self.signal = 2
     
     def choose_place(self, board):  # MÉTODO ONDE A MÁQUINA ESCOLHE SEU LUGAR ALEATORIAMENTE
@@ -149,6 +150,9 @@ class Game:
             player01.choose_signal()
             player02.defined_signal(player01)
 
+            Refresh()
+            Menu.show_signals(player01, player02)
+
             while finished[0] != True:
                 board, finished = player01.choose_place(board)
                 board, finished = player02.choose_place(board)
@@ -161,6 +165,9 @@ class Game:
 
             player.choose_signal()
             machine.choose_signal(player)
+
+            Refresh()
+            Menu.show_signals(player, machine)
 
             while finished[0] != True:
                 board, finished = player.choose_place(board)
@@ -274,6 +281,13 @@ class Menu:
     def choosing_signal(name):  # MÉTODO PARA O JOGADOR ESCOLHER SEU SINAL
         print(f"*** Escolha seu sinal, { name } ***")
         return SignalChoice()
+
+    def show_signals(player01, player02):
+        print("*** SINAIS ESCOLHIDOS ***\n")
+        print(f"{ player01.name } é { 'X' if player01.signal == 1 else 'O'  }")
+        print(f"{ 'Máquina' if player02.machine else player02.name } é { 'X' if player02.signal == 1 else 'O' }")
+        input("\n\nPressione ENTER para continuar...")
+        Refresh()
 
     def new_game():  # INICIA O JOGO DO ZERO
         print("*** JOGO DA VELHA ***")
