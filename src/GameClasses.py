@@ -5,21 +5,16 @@ from random import randint
 
 class Player:
     '''
-    responsável por instanciar os jogadores e realizar suas jogadas.
-    se comunica com a classe Game.
+    Responsável por representar os jogadores e realizar suas ações, sejam elas jogar ou determinar o sinal.
     '''
     
     def __init__(self, name, score):  # MÉTODO CONSTRUTOR
-        self.name = name 
+        self.name = name
         self.score = score
         self.machine = False
-        self.signal = 2
+        self.signal = 2  # sinal padrão (não escolhido)
 
     def choose_place(self, board):  # MÉTODO ONDE O JOGADOR ESCOLHE SEU LUGAR NO TABULEIRO
-        '''
-        realiza a escolha do local do jogador no tabuleiro.
-        se comunica com ... para saber se o local é valido.
-        '''
         Refresh()
         finished = Game.verify_game_state(board)
         # Verifica se o jogo já foi vencido antes do próximo jogador jogar
@@ -40,14 +35,14 @@ class Player:
     def defined_signal(self, player):  # ESCOLHA INVOLUNTÁRIA DO SINAL DO JOGADOR
         if player.signal == 1:
             self.signal = 0
-        else:
+        else:  # Verifica o sinal do primeiro jogador e determina o sinal do segundo
             self.signal = 1
 
 
 class Machine:
     '''
-    responsável por atuar como computador/máquina interagindo com o jogador aleatóriamente.
-    funciona como a classe Player, mas aleatóriamente.
+    Responsável por atuar como computador/máquina interagindo com o jogador aleatóriamente.
+    Funciona como a classe Player, mas aleatóriamente e sem visualização ou interação com o usuário.
     '''
 
     def __init__(self, score):  # MÉTODO CONSTRUTOR
@@ -70,8 +65,8 @@ class Machine:
                 Machine.machine_playing()
                 return board, finished
     
-    def intelligence_place(self, board):
-        pass
+    '''def intelligence_place(self, board):
+        pass'''  # Método arquivado
         
     def machine_playing():  # AVISA O JOGADOR QUE A MÁQUINA ESTÁ JOGANDO
         Refresh()
@@ -82,14 +77,14 @@ class Machine:
         sleep(0.5)
         Refresh()
 
-    def choose_signal(self, player):
+    def choose_signal(self, player):  # DETERMINA INVOLUNTARIAMENTE O SINAL DA MÁQUINA
         self.signal = 1 if player.signal == 0 else 0
 
 
 class Game:
     '''
-    responsável por controlar o tabuleiro, verificar local e se há vencedor ou empate.
-    pode resetar a si próprio.
+    Responsável por controlar e gerir todo o funcionamento do jogo, como verificar e realizar as jogadas,
+    assim como verificar se houveram vitórias ou empates.
     '''
     
     def show_board(board):  # MOSTRA O TABULEIRO
@@ -104,8 +99,10 @@ class Game:
                 board_string += f"{ enum }"
             
             if enum != 3 and enum != 6 and enum != 9:
+                # Se o index do número ou sinal no array do tabuleiro NÃO for a "borda" do mesmo, separa os números ou sinais.
                 board_string += " | "
             if enum == 3 or enum == 6:
+                # Se o index do número ou sinal no array do tabuleiro FOR a primeira ou segunda "borda" do mesmo, divide horizontalmente
                 board_string += "\n- - - - -\n"
         print(board_string)
 
@@ -134,11 +131,11 @@ class Game:
             elif board[2] == num and board[4] == num and board[6] == num:
                 return  True, num
 
-        else:
-            if Game.tie_verifier(board):
+        else:  # Se não houve nenhuma vitória...
+            if Game.tie_verifier(board):  # Se houve um empate...
                 return True, 3
             else:
-                return False, 2
+                return False, 2  # Não houve nada, então o tabuleiro não está completo para um final ocorrer...
 
     def game(score, board, multiplayer):  # EXECUTA O JOGO TÉCNICAMENTE
         finished = Game.verify_game_state(board)
@@ -183,15 +180,17 @@ class Game:
     def places_left(board):  # RETORNA UM ARRAY COM TODOS OS INDEXS DOS LUGARES DISPONIVEIS NO BOARD
         places_left = []
         for num, place in enumerate(board):
-            if place == 2:
+            if place == 2:  # Se a informação naquele local for um 2, ninguém jogou nada ali, então aquele index está disponível para ser escolhido.
                 places_left.append(num + 1)
-            else:
+            else:  # Se a informação naquele local não for um 2, aquele local já foi ocupado, portanto, será zero.
                 places_left.append(0)
+                # Um zero jamais poderia ser escolhido, mas esse index não poderia ser omitido, então permanece zero.
         return places_left
 
     def tie_verifier(board):  # VERIFICA EMPATE NO JOGO
         places_left = Game.places_left(board)
         if sum(places_left) == 0:
+            # Se a soma de todos os números (indexs) for zero, significa que todos foram ocupados.
             return True
         else:
             return False
@@ -238,7 +237,7 @@ class Game:
             elif player02[0] == winner:
                 Score.write_data(player01, [player02[0], player02[1] + 1], machine)
             else:
-                pass  # EMPATE
+                pass  # EMPATE (nenhuma pontuação é salva)
 
     def reset_board():  # RESETA O TABULEIRO
         return [ 2, 2, 2,
@@ -248,8 +247,8 @@ class Game:
 
 class Menu:
     '''
-    realiza a movimentação do jogo, chamando a classe txtFile e fazendo verificações.
-    se comunica diretamente com Player, Machine e Game para dar andamento ao jogo
+    Realiza a movimentação do jogo, chamando a classe txtFile e fazendo verificações.
+    Se comunica diretamente com Player, Machine e Game para dar andamento ao jogo.
     '''
 
     def opening():  # Inicia o jogo, chamando txtFile para verificar como proceder na abertura
@@ -282,7 +281,7 @@ class Menu:
         print(f"*** Escolha seu sinal, { name } ***")
         return SignalChoice()
 
-    def show_signals(player01, player02):
+    def show_signals(player01, player02):  # MOSTRA OS SINAIS DOS JOGADORES
         print("*** SINAIS ESCOLHIDOS ***\n")
         print(f"{ player01.name } é { 'X' if player01.signal == 1 else 'O'  }")
         print(f"{ 'Máquina' if player02.machine else player02.name } é { 'X' if player02.signal == 1 else 'O' }")
@@ -290,7 +289,7 @@ class Menu:
         Refresh()
 
     def new_game():  # INICIA O JOGO DO ZERO
-        print("*** JOGO DA VELHA ***")
+        print("*** JOGO DA VELHA ***\n")
         p1_name = Name(1)
         p2_name = Name(2)
         Score.write_data([p1_name, 0], [p2_name, 0], 0)
@@ -298,7 +297,7 @@ class Menu:
         Refresh()
         return [[p1_name, 0], [p2_name, 0], 0]
 
-    def game(score, board):  # MÉTODO MESTRE
+    def game(score, board):  # MÉTODO MENU (COORDENA TODO O JOGO)
         while True:
             print("*** JOGO DA VELHA ***")
             print(f"\nBem vindos { score[0][0] } e { score[1][0] }!\nO que desejam fazer?")
@@ -371,9 +370,9 @@ class Menu:
 
             if opc == 5:  # INFORMAÇÕES
                 print("*** INFORMAÇÕES ***")
-                print("\nJogo da Velha - Versão 1.0\nDesenvolvedor: Raisson Souza\nTester: Mariane Pigato")
+                print("\nJogo da Velha - Versão 1.5\nDesenvolvedor: Raisson Souza\nTester: Mariane Pigato")
                 print("\nVersão 1.0\n\r- Jogo completo")
-                print("\nVersão 2.0\n\r- Inteligência Artificial")
+                print("\nVersão 2.0\n\r- Inteligência Artificial\n\r- Salvamento do último acesso\n\r- Salvamento do número de empates")
                 print("\nGitHub: github.com/RaissonSS")
                 input("\n\nPressione ENTER para voltar...")
 

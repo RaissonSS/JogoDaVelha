@@ -1,5 +1,9 @@
 from os import system
 
+"""
+Este arquivo contém funções auxiliares para as classes de GameClasses com tratamento de exceção incluido.
+"""
+
 def Name(playerNumber):  # Trata inputs destinados ao nome
     finished = False
     while finished != True:

@@ -1,6 +1,7 @@
 from src.GameClasses import Menu
 
 newGame = Menu.opening()  # Faz a abertura e verificação do arquivo score.txt
+# Retorna a pontuação dos jogadores ou FALSO como a inexistência da mesma
 
 if newGame == False:
     gameScore = Menu.new_game()  # Inicia do zero caso o arquivo não exista
